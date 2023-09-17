@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="" />
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/adaptive-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/images/applogo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/splash.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/babel.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/IssuesScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/NotificationsScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ProjectScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/HomeStack.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/RegisterScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/WelcomeScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/authentication.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tailwind.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/task-app-fe.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,23 +41,39 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2VVCEzZctpkXXVwwS2LXON9GOo8" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\doant\\Desktop\\task-app-fe\\src\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\doant\Desktop\task-app-fe\src\screens" />
+      <recent name="C:\Users\doant\Desktop\task-app-fe\src\components" />
+      <recent name="C:\Users\doant\Desktop\task-app-fe\src\assets\images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -35,8 +82,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1694911752714</updated>
-      <workItem from="1694911754108" duration="4000" />
+      <workItem from="1694911754108" duration="2451000" />
+      <workItem from="1694917115126" duration="1617000" />
+      <workItem from="1694934269860" duration="10150000" />
+      <workItem from="1694947112063" duration="1649000" />
+      <workItem from="1694948867884" duration="757000" />
+      <workItem from="1694950594202" duration="2624000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/app.d.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

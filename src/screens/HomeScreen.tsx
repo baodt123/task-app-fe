@@ -1,18 +1,20 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+// @ts-ignore
+const HomeScreen = ({navigation}) => {
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Image source={require("../assets/images/applogo.png")} style={{width: 150, height: 150}}/>
             <Text>Home page is coming soon!</Text>
             <TouchableOpacity onPress={() => navigation.navigate('Project')}>
-                <Text>Go to Project</Text>
+                <Text>Project</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Issues')}>
-                <Text>Go to Issues</Text>
+                <Text>Issues</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
-                <Text>Go to Notifications</Text>
+                <Text>Notifications</Text>
             </TouchableOpacity>
         </View>
     );

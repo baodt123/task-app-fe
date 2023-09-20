@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store'
 
 const BASE_URL = "http://192.168.1.227:8080/api/v1";
 
@@ -13,65 +13,56 @@ interface LoginData {
     username: string
     password: string
 }
-
-const axiosInstance = axios.create({
-    baseURL: BASE_URL,
-});
-
-// Add the token to Axios headers
-export const addTokenToAxios = async () => {
-    const jwtToken = await getAccessToken();
-    if (jwtToken) {
-        axiosInstance.defaults.headers.common['Authorization'] = jwtToken;
-    }
-};
-
-// Store the JWT token securely
-export const storeAccessToken = async (token: string) => {
-    await SecureStore.setItemAsync('jwtToken', token);
-};
-
-// Retrieve the JWT token from SecureStore
-export const getAccessToken = async () => {
-    return await SecureStore.getItemAsync('jwtToken');
-};
-
-export const registerApi = ({email, username, password}: RegisterData) => {
-    return axiosInstance({
+export const registerApi = ({ username, email, password }: RegisterData) => {
+    return axios({
         method: "POST",
-        url: "/register",
+        url: BASE_URL.concat("/register"),
         data: {
+            name,
             email,
+            password
+        }
+    })
+}
+
+export const loginApi = ({ username, password }: LoginData) => {
+    return axios({
+        method: "POST",
+        url: BASE_URL.concat("/login"),
+        data: {
             username,
             password
         }
-    });
-};
+    })
+}
 
-export const loginApi = async ({username, password}: LoginData) => {
-    try {
-        const loginResponse = await axiosInstance({
-            method: "POST",
-            url: "/login",
-            data: {
-                username,
-                password
-            }
-        });
-
-        if (loginResponse && loginResponse.headers) {
-            const jwtToken = loginResponse.headers['authorization'];
-            if (jwtToken) {
-                await storeAccessToken(jwtToken);
-                await addTokenToAxios();
-                return loginResponse.data;
-            } else {
-                alert("JWT token not found in response headers");
-            }
-        } else {
-            alert("Invalid response format from the server");
-        }
-    } catch (err) {
-        throw err;
+export const setAccessToken = async(accessToken : string) => {
+    if(!accessToken) {
+        return false
     }
-};
+    try {
+        await SecureStore.setItemAsync('accessToken', accessToken)
+        addTokenToAxios(accessToken)
+        return true
+    } catch(error) {
+        console.log("error when save token", error)
+    }
+    return false
+}
+
+export const getAccessToken = async() => {
+    try {
+        return await SecureStore.getItemAsync('accessToken')
+    } catch (error) {
+        console.log("error when save token", error)
+    }
+    return false
+}
+export const addTokenToAxios = (accessToken: string) => {
+    axios.interceptors.request.use(function (config) {
+        config.headers.Authorization = `Bearer ${accessToken}`
+        return config;
+    }, function (error) {
+        return Promise.reject(error);
+    })
+}

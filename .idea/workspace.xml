@@ -4,34 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/adaptive-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/images/applogo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/splash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/IssuesScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NotificationsScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ProjectScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/HomeStack.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/RegisterScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/WelcomeScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/authentication.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tailwind.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task-app-fe.iml" afterDir="false" />
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="fe-1">
+      <change afterPath="$PROJECT_DIR$/src/navigation/AppStack.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/navigation/AuthStack.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/navigation/TabNavigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeStack.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/authentication.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +24,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -88,7 +75,48 @@
       <workItem from="1694947112063" duration="1649000" />
       <workItem from="1694948867884" duration="757000" />
       <workItem from="1694950594202" duration="2624000" />
+      <workItem from="1694960312757" duration="1855000" />
+      <workItem from="1694962656967" duration="1487000" />
+      <workItem from="1694964265933" duration="465000" />
+      <workItem from="1695047444307" duration="2314000" />
+      <workItem from="1695050477933" duration="2935000" />
+      <workItem from="1695082086311" duration="3453000" />
+      <workItem from="1695145679751" duration="57000" />
+      <workItem from="1695176374000" duration="8000" />
     </task>
+    <task id="LOCAL-00001" summary="fe-1">
+      <option name="closed" value="true" />
+      <created>1694960796655</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1694960796655</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fe-1">
+      <option name="closed" value="true" />
+      <created>1694960813793</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1694960813793</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fe-1">
+      <option name="closed" value="true" />
+      <created>1694960848766</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1694960848766</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fe-1">
+      <option name="closed" value="true" />
+      <created>1694960908907</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1694960908907</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,7 +127,20 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fe-1" />
+    <option name="LAST_COMMIT_MESSAGE" value="fe-1" />
   </component>
 </project>

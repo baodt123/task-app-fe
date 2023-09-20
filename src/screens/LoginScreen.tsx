@@ -2,36 +2,48 @@ import {StatusBar} from 'expo-status-bar';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useEffect, useState} from "react";
 import * as SecureStore from 'expo-secure-store'
-import {loginApi} from "../services/authentication";
+import {addTokenToAxios, getAccessToken, loginApi, setAccessToken} from "../services/authentication";
 
 // @ts-ignore
 const LoginScreen = ({navigation}) => {
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [showPassword, setShowPassword] = useState(false)
+    const checkAuthenticated = async() => {
+        try {
+            const accessToken = await getAccessToken()
+            if(accessToken) {
+                addTokenToAxios(accessToken)
+                navigation.navigate("HomeScreen")
+            }
+        } catch(error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        checkAuthenticated()
+    }, [])
+
     const login = async () => {
         try {
-            const {data} = await loginApi({
+            const loginResponse = await loginApi({
                 username,
                 password
-            });
-            alert("Login Success!");
-            navigation.navigate("HomeScreen");
-        } catch (err) {
-            // @ts-ignore
-            alert(err.message);
-        }
-    };
-
-    useEffect(() => {
-        const checkTokenAndNavigate = async () => {
-            const jwtToken = await SecureStore.getItemAsync('jwtToken');
-            if (jwtToken) {
-                navigation.navigate("HomeScreen");
+            })
+            const {data} = loginResponse
+            const result = await setAccessToken(data.token)
+            if(result) {
+                const accessToken = await getAccessToken()
+                navigation.navigate("HomeScreen")
+            }else {
+                alert("error when login")
             }
-        };
-        checkTokenAndNavigate()
-    }, []);
+        } catch(err) {
+            // @ts-ignore
+            const {data} = err.response
+            alert(data.message)
+        }
+    }
 
     const handleLoginWithGoogle = () => {
         // Add your logic for handling Google login here

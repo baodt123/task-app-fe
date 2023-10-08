@@ -1,35 +1,74 @@
-import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
-import ProjectScreen from "../components/ProjectScreen";
-import IssuesScreen from "../components/IssuesScreen";
-import NotificationsScreen from "../components/NotificationsScreen";
-import HomeScreen from '../screens/HomeScreen';
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const HomeStack = () => {
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}}/>
-        </Stack.Navigator>
-    );
-};
+import HomeScreen from "../screens/HomeScreen";
+import ProjectScreen from "../screens/project/ProjectScreen";
+import TaskScreen from "../screens/TaskScreen";
+import NotificationScreen from "../screens/NotificationScreen";
+import { Feather } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+
+const Tab = createBottomTabNavigator();
+
 const TabNavigator = () => {
-    return (
-        <Tab.Navigator
-            screenOptions={{
-                headerShown: false,
-                tabBarShowLabel: false,
-                tabBarStyle: {backgroundColor: '#AD40AF'},
-                tabBarInactiveTintColor: '#fff',
-                tabBarActiveTintColor: 'yellow',
-            }}>
-            <Tab.Screen name="Project" component={ProjectScreen}/>
-            <Tab.Screen name="Issues" component={IssuesScreen}/>
-            <Tab.Screen name="Notifications" component={NotificationsScreen}/>
-        </Tab.Navigator>
-    );
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "blue",
+        tabBarShowLabel: false,
+      }}>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Feather name="home" size={26} color={focused ? "blue" : "gray"} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Project"
+        component={ProjectScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="folder1"
+              size={26}
+              color={focused ? "blue" : "gray"}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Task"
+        component={TaskScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="menufold"
+              size={26}
+              color={focused ? "blue" : "gray"}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Notification"
+        component={NotificationScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome5
+              name="bell"
+              size={26}
+              color={focused ? "blue" : "gray"}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
 };
+
 export default TabNavigator;

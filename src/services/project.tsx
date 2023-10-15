@@ -48,7 +48,10 @@ export const getProjectById = async (id: any) => {
   });
 };
 
-export const updateProjectApi = async (id: any, { name, description }: ProjectData) => {
+export const updateProjectApi = async (
+  id: any,
+  { name, description }: ProjectData
+) => {
   const accessToken = await SecureStore.getItemAsync("accessToken");
   return axios({
     method: "PUT",
@@ -63,18 +66,14 @@ export const updateProjectApi = async (id: any, { name, description }: ProjectDa
   });
 };
 
-// export const deleteProjectApi = async ({ name, description }: ProjectData) => {
-//   const accessToken = await SecureStore.getItemAsync("accessToken");
-//   const username = await getUsername();
-//   return axios({
-//     method: "POST",
-//     url: BASE_URL.concat(`/${username}`),
-//     data: {
-//       name,
-//       description,
-//     },
-//     headers: {
-//       Authorization: `Bearer ${accessToken}`,
-//     },
-//   });
-// };
+export const deleteProjectApi = async (id: any) => {
+  const accessToken = await SecureStore.getItemAsync("accessToken");
+  const username = await getUsername();
+  return axios({
+    method: "DELETE",
+    url: BASE_URL.concat(`/delete/${id}`),
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};

@@ -47,11 +47,10 @@ const LoginScreen = ({ navigation }) => {
           const username = await setUsername(data.username);
           navigation.navigate("Stack");
         } else {
-          alert("error when login");
+          alert("Error when login");
         }
       } catch (err) {
-        const { data } = err.response;
-        alert(data.message);
+        alert("Invalid username or password");
       }
     },
   });

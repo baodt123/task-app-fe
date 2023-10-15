@@ -1,5 +1,4 @@
-// ProjectDetailScreen.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,9 +9,9 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AntDesign } from "@expo/vector-icons";
-import { updateProjectApi } from "../../services/project";
+import { deleteProjectApi, getProjectById, updateProjectApi } from "../../services/project";
 
-const ProjectDetailScreen = ({ route }) => {
+const ProjectDetailScreen = ({ route, navigation }) => {
   const { project } = route.params;
   const [isEditing, setIsEditing] = useState(false);
   const validationSchema = Yup.object().shape({
@@ -29,12 +28,29 @@ const ProjectDetailScreen = ({ route }) => {
       try {
         await updateProjectApi(project.id, values);
         setIsEditing(false);
+        const response = await getProjectById(project.id);
+        project.name = response.data.name;
+        project.description = response.data.description;
       } catch (error) {
         console.error("Error updating project info", error);
       }
     },
   });
+  
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await getProjectById(project.id);
+        formik.setFieldValue("name", response.data.name);
+        formik.setFieldValue("description", response.data.description);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
+    fetchUserInfo();
+  }, []);
+  
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
@@ -49,7 +65,15 @@ const ProjectDetailScreen = ({ route }) => {
               <AntDesign name="edit" size={24} color="blue" />
             </TouchableOpacity>
           )}
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={async () => {
+              try {
+                await deleteProjectApi(project.id);
+                navigation.navigate("Project");
+              } catch (error) {
+                console.error("Error deleting project", error);
+              }
+            }}>
             <AntDesign name="delete" size={24} color="blue" />
           </TouchableOpacity>
         </View>
@@ -65,7 +89,6 @@ const ProjectDetailScreen = ({ route }) => {
           <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
             <TextInput
               className="flex-grow text-lg"
-              placeholder={project.name}
               value={formik.values.name}
               onChangeText={formik.handleChange("name")}
             />
@@ -82,7 +105,6 @@ const ProjectDetailScreen = ({ route }) => {
           <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
             <TextInput
               className="flex-grow text-lg"
-              placeholder={project.description}
               value={formik.values.description}
               onChangeText={formik.handleChange("description")}
             />

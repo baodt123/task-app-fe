@@ -9,10 +9,8 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { getProjectsApi } from "../../services/project";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 const ProjectScreen = ({ navigation }) => {
-  // const navigation = useNavigation();
   const colors = ["blue", "red", "green", "purple", "cyan", "orange"];
   const [projects, setProjects] = useState([]);
 
@@ -24,11 +22,22 @@ const ProjectScreen = ({ navigation }) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
 
-  const getRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
+    const unsubscribe = navigation.addListener("focus", () => {
+      getProjectsApi()
+        .then((response) => {
+          setProjects(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+
+    return () => unsubscribe();
+  }, [navigation]);
+
+  const getColor = (index) => {
+    return colors[index % colors.length];
   };
 
   return (
@@ -46,22 +55,22 @@ const ProjectScreen = ({ navigation }) => {
       </View>
       <View className="h-0.5 my-3 bg-gray-200"></View>
       <View className="mx-6">
-        <Text className="mb-6">All projects</Text>
+        <Text className="mb-6 text-base">All projects</Text>
         <FlatList
           data={projects}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <TouchableOpacity
-              className="flex flex-row items-center mb-2"
+              className="flex flex-row items-center mb-4"
               onPress={() =>
-                navigation.navigate("ProjectDetailScreen", { project: item })
+                navigation.navigate("ProjectHome", { project: item })
               }>
-              <MaterialCommunityIcons
-                name="penguin"
-                size={24}
-                color={getRandomColor()}
-              />
-              <Text className="ml-2 text-lg font-medium ">{item.name}</Text>
+                <MaterialCommunityIcons
+                  name="penguin"
+                  size={30}
+                  color={getColor(index)}
+                />
+              <Text className="ml-3 text-lg font-medium ">{item.name}</Text>
             </TouchableOpacity>
           )}
         />

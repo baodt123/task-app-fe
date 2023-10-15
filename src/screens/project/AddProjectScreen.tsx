@@ -26,11 +26,11 @@ const AddProjectScreen = ({navigation}) => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await createProjectApi(values);
+        await createProjectApi(values);
         Alert.alert("Message", "Create project success!");
-        navigation.navigate("ProjectScreen");
+        navigation.navigate("Project");
       } catch (error) {
-        console.log("Error create project info", error);
+        Alert.alert("Message", "Project name already used");
       }
     },
   });
@@ -41,11 +41,11 @@ const AddProjectScreen = ({navigation}) => {
       </View>
       <View className="h-0.5 my-3 bg-gray-200"></View>
       <View className="mx-6">
-        <Text className="text-xl font-medium ">Project name</Text>
+        <Text className="text-xl font-medium ">Name</Text>
         <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
           <TextInput
             className="flex-grow text-lg"
-            placeholder="Enter project name"
+            placeholder="Project name"
             value={formik.values.name}
             onChangeText={formik.handleChange("name")}
           />
@@ -56,7 +56,7 @@ const AddProjectScreen = ({navigation}) => {
         <Text className="text-xl font-medium ">Description</Text>
         <TextInput
           className="py-2 mb-2 text-lg border-b border-gray-400"
-          placeholder="Enter Description"
+          placeholder="Description"
           value={formik.values.description}
           onChangeText={formik.handleChange("description")}
         />

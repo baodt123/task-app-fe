@@ -12,6 +12,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { getUserInfo, updateUserInfo } from "../../services/user";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { DrawerActions } from "@react-navigation/native";
 
 
 const ProfileScreen = ({ navigation }) => {

@@ -10,7 +10,11 @@ import ChangePasswordScreen from "../screens/user/ChangePasswordScreen";
 import ProfileScreen from "../screens/user/ProfileScreen";
 import AddProjectScreen from "../screens/project/AddProjectScreen";
 import ProjectScreen from "../screens/project/ProjectScreen";
-import ProjectDetailScreen from "../screens/project/ProjectDetailScreen";
+import DetailScreen from "../screens/project/DetailScreen";
+import ProjectHome from "../screens/project/ProjectHome";
+import BroadScreen from "../screens/project/BroadScreen";
+import MemberScreen from "../screens/project/MemberScreen";
+import AddTaskInside from "../screens/task/AddTaskInside";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +32,11 @@ const AuthStack = () => {
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
       <Stack.Screen name="ProjectScreen" component={ProjectScreen} />
       <Stack.Screen name="AddProjectScreen" component={AddProjectScreen} />
-      <Stack.Screen name="ProjectDetailScreen" component={ProjectDetailScreen} />
+      <Stack.Screen name="DetailScreen" component={DetailScreen} />
+      <Stack.Screen name="ProjectHome" component={ProjectHome} />
+      <Stack.Screen name="BroadScreen" component={BroadScreen} />
+      <Stack.Screen name="MemberScreen" component={MemberScreen} />
+      <Stack.Screen name="AddTaskInside" component={AddTaskInside} />
     </Stack.Navigator>
   );
 };

@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import ProjectScreen from "../screens/project/ProjectScreen";
-import TaskScreen from "../screens/TaskScreen";
+import TaskScreen from "../screens/task/TaskScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import { Feather } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";

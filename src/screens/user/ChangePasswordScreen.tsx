@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { changePasswordUser } from "../../services/user";
 import { SafeAreaView } from "react-navigation";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { DrawerActions } from "@react-navigation/native";
 
 const ChangePasswordScreen = ({ navigation }) => {
   const [showOldPassword, setShowOldPassword] = useState(false);
@@ -35,7 +36,7 @@ const ChangePasswordScreen = ({ navigation }) => {
       try {
         const response = await changePasswordUser(values);
         console.log(response);
-        navigation.navigate("ProfileScreen");
+        navigation.navigate("Profile");
       } catch (error) {
         console.log("Error updating user info", error);
       }
@@ -52,9 +53,7 @@ const ChangePasswordScreen = ({ navigation }) => {
 
       <View className="mx-6 ">
         <View className="px-4 mb-4">
-          <Text className="text-xl font-semibold">
-            Change your password
-          </Text>
+          <Text className="text-xl font-semibold">Change your password</Text>
         </View>
         <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-b border-gray-400">
           <TextInput
@@ -132,7 +131,7 @@ const ChangePasswordScreen = ({ navigation }) => {
             className="items-center justify-center h-12 px-6 mr-10 bg-blue-700 rounded-2xl"
             onPress={() => {
               formik.resetForm();
-              navigation.navigate("ProfileScreen");
+              navigation.navigate("Profile");
             }}>
             <Text className="text-base font-medium text-white ">Cancel</Text>
           </TouchableOpacity>

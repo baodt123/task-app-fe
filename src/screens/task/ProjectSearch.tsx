@@ -10,10 +10,11 @@ import { Feather } from "@expo/vector-icons";
 import { getProjectsApi } from "../../services/project";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const ProjectScreen = ({ navigation }) => {
+const ProjectSeacrh = ({ navigation }) => {
   
+    
   const [projects, setProjects] = useState([]);
-
+  
   useEffect(() => {
     getProjectsApi()
       .then((response) => {
@@ -36,7 +37,6 @@ const ProjectScreen = ({ navigation }) => {
     return () => unsubscribe();
   }, [navigation]);
 
-
   const colors = ["blue", "red", "green", "purple", "cyan", "orange"];
   const getColor = (index) => {
     return colors[index % colors.length];
@@ -46,17 +46,6 @@ const ProjectScreen = ({ navigation }) => {
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
         <Text className="text-2xl font-semibold text-blue-700">Projects</Text>
-        <View className="flex flex-row">
-          <TouchableOpacity
-            onPress={() => navigation.navigate("AddProjectScreen")}
-            className="mr-3">
-            <Feather name="plus" size={30} color="blue" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("EnrollUser")}>
-            <Feather name="search" size={30} color="blue" />
-          </TouchableOpacity>
-        </View>
       </View>
       <View className="h-0.5 my-3 bg-gray-200"></View>
       <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
@@ -74,7 +63,7 @@ const ProjectScreen = ({ navigation }) => {
             <TouchableOpacity
               className="flex flex-row items-center p-3 m-1.5 bg-white rounded-lg"
               onPress={() =>
-                navigation.navigate("ProjectHome", { project: item })
+                navigation.navigate("AddTaskOutside", { project: item })
               }>
               <MaterialCommunityIcons
                 name="penguin"
@@ -90,4 +79,4 @@ const ProjectScreen = ({ navigation }) => {
   );
 };
 
-export default ProjectScreen;
+export default ProjectSeacrh;

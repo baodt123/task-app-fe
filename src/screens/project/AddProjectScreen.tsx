@@ -4,36 +4,43 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
-import React from 'react'
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import React, { useState } from "react";
 import { createProjectApi } from "../../services/project";
+import { ToastAlert } from "../../components/ToastAlert";
 
-const AddProjectScreen = ({navigation}) => {
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, "At least 2 characters!")
-      .required("Required!"),
-  });
+const AddProjectScreen = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      description: ""
-    },
-    validationSchema,
-    onSubmit: async (values) => {
-      try {
-        await createProjectApi(values);
-        Alert.alert("Message", "Create project success!");
-        navigation.navigate("Project");
-      } catch (error) {
-        Alert.alert("Message", "Project name already used");
-      }
-    },
-  });
+  const hanldeCreate = async () => {
+    const ProjectData = {
+      name,
+      description,
+    };
+
+    if (!ProjectData.name) {
+      ToastAlert("error", "Error", "Name is required!");
+      return;
+    }
+
+    if (ProjectData.name.length < 3) {
+      ToastAlert(
+        "error",
+        "Error",
+        "Name must be at least 3 characters long!"
+      );
+      return;
+    }
+    try {
+      await createProjectApi(ProjectData);
+      ToastAlert("success", "Success", "Create project success!");
+      navigation.goBack();
+    } catch (error) {
+      ToastAlert("error", "Error", "Project name already used!");
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
@@ -46,23 +53,20 @@ const AddProjectScreen = ({navigation}) => {
           <TextInput
             className="flex-grow text-lg"
             placeholder="Project name"
-            value={formik.values.name}
-            onChangeText={formik.handleChange("name")}
+            value={name}
+            onChangeText={setName}
           />
-          {formik.errors.name && (
-            <Text className="m-2 text-red-700">{formik.errors.name}</Text>
-          )}
         </View>
         <Text className="text-xl font-medium ">Description</Text>
         <TextInput
           className="py-2 mb-2 text-lg border-b border-gray-400"
           placeholder="Description"
-          value={formik.values.description}
-          onChangeText={formik.handleChange("description")}
+          value={description}
+          onChangeText={setDescription}
         />
         <TouchableOpacity
           className="items-center justify-center p-2.5 my-2 bg-blue-700 rounded-xl"
-          onPress={() => formik.handleSubmit()}>
+          onPress={hanldeCreate}>
           <Text className="text-xl font-medium text-white">Create Project</Text>
         </TouchableOpacity>
       </View>
@@ -70,4 +74,4 @@ const AddProjectScreen = ({navigation}) => {
   );
 };
 
-export default AddProjectScreen
+export default AddProjectScreen;

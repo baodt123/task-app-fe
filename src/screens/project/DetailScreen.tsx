@@ -6,56 +6,83 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import { AntDesign } from "@expo/vector-icons";
-import { deleteProjectApi, getProjectById, updateProjectApi } from "../../services/project";
+import {
+  deleteProjectApi,
+  getProjectById,
+  updateProjectApi,
+} from "../../services/project";
+import { ToastAlert } from "../../components/ToastAlert";
 
 const ProjectDetailScreen = ({ route, navigation }) => {
   const { project } = route.params;
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().min(2, "At least 2 characters!").required("Required!"),
-  });
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      description: "",
-    },
-    validationSchema,
-    onSubmit: async (values) => {
-      try {
-        await updateProjectApi(project.id, values);
-        setIsEditing(false);
-        const response = await getProjectById(project.id);
-        project.name = response.data.name;
-        project.description = response.data.description;
-      } catch (error) {
-        console.error("Error updating project info", error);
-      }
-    },
-  });
-  
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await getProjectById(project.id);
-        formik.setFieldValue("name", response.data.name);
-        formik.setFieldValue("description", response.data.description);
-      } catch (error) {
-        console.log(error);
-      }
+  const hanldeUpdate = async () => {
+    const ProjectData = {
+      name,
+      description,
     };
 
-    fetchUserInfo();
-  }, []);
-  
+    if (!ProjectData.name) {
+      ToastAlert("error", "Error", "Name is required!");
+      return;
+    }
+
+    if (ProjectData.name.length < 3) {
+      ToastAlert("error", "Error", "Name must be at least 3 characters long!");
+      return;
+    }
+    try {
+      await updateProjectApi(project.id, ProjectData);
+      ToastAlert("success", "Success", "Update success!");
+      setIsEditing(false);
+    } catch (error) {
+      ToastAlert("error", "Error", "Error when update!");
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteProjectApi(project.id);
+      ToastAlert("success", "Success", "Delete success!");
+      navigation.navigate("Project");
+    } catch (error) {
+      ToastAlert("error", "Error", "Error when delete!");
+    }
+  };
+
+  useEffect(() => {
+    getProjectById(project.id)
+      .then((response) => {
+        setName(response.data.name);
+        setDescription(response.data.description);
+      })
+      .catch((error) => {
+        ToastAlert("error", "Error", error);
+      });
+
+    const unsubscribe = navigation.addListener("focus", () => {
+      getProjectById(project.id)
+        .then((response) => {
+          setName(response.data.name);
+          setDescription(response.data.description);
+        })
+        .catch((error) => {
+          ToastAlert("error", "Error", error);
+        });
+    });
+
+    return () => unsubscribe();
+  }, [navigation]);
+
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
         <Text className="text-2xl font-semibold text-blue-700">
-          {project.name}
+          {name}
         </Text>
         <View className="flex flex-row">
           {!isEditing && (
@@ -65,15 +92,7 @@ const ProjectDetailScreen = ({ route, navigation }) => {
               <AntDesign name="edit" size={24} color="blue" />
             </TouchableOpacity>
           )}
-          <TouchableOpacity
-            onPress={async () => {
-              try {
-                await deleteProjectApi(project.id);
-                navigation.navigate("Project");
-              } catch (error) {
-                console.error("Error deleting project", error);
-              }
-            }}>
+          <TouchableOpacity onPress={handleDelete}>
             <AntDesign name="delete" size={24} color="blue" />
           </TouchableOpacity>
         </View>
@@ -82,31 +101,24 @@ const ProjectDetailScreen = ({ route, navigation }) => {
 
       <View className="mx-6">
         <Text className="text-xl font-medium ">Project name</Text>
-        {!isEditing && (
-          <Text className="py-2 mb-2 text-lg ">{project.name}</Text>
-        )}
+        {!isEditing && <Text className="py-2 mb-2 text-lg ">{name}</Text>}
         {isEditing && (
           <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
             <TextInput
               className="flex-grow text-lg"
-              value={formik.values.name}
-              onChangeText={formik.handleChange("name")}
+              value={name}
+              onChangeText={setName}
             />
-            {formik.errors.name && (
-              <Text className="m-2 text-red-700">{formik.errors.name}</Text>
-            )}
           </View>
         )}
         <Text className="text-xl font-medium ">Description</Text>
-        {!isEditing && (
-          <Text className="py-2 mb-2 text-lg">{project.description}</Text>
-        )}
+        {!isEditing && <Text className="py-2 mb-2 text-lg">{description}</Text>}
         {isEditing && (
           <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
             <TextInput
               className="flex-grow text-lg"
-              value={formik.values.description}
-              onChangeText={formik.handleChange("description")}
+              value={description}
+              onChangeText={setDescription}
             />
           </View>
         )}
@@ -116,7 +128,7 @@ const ProjectDetailScreen = ({ route, navigation }) => {
             <>
               <TouchableOpacity
                 className="items-center justify-center h-12 px-8 bg-blue-700 ml-14 rounded-2xl"
-                onPress={() => formik.handleSubmit()}>
+                onPress={hanldeUpdate}>
                 <Text className="text-base font-medium text-white ">Save</Text>
               </TouchableOpacity>
               <TouchableOpacity

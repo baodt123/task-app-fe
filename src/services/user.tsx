@@ -8,26 +8,16 @@ interface UpdateData {
   email: string;
 }
 
-interface InfoData {
-  username: string;
-  fullName: string;
-  email: string;
-}
-
 interface ChangeData {
   oldPassword: string;
   newPassword: string;
 }
 
 export const getUserInfo = async () => {
-  const accessToken = await SecureStore.getItemAsync("accessToken");
   const username = await getUsername();
   return axios({
     method: "GET",
     url: BASE_URL.concat(`/${username}`),
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
   });
 };
 
@@ -54,7 +44,6 @@ export const getUsername = async () => {
 };
 
 export const updateUserInfo = async ({ fullName, email }: UpdateData) => {
-  const accessToken = await SecureStore.getItemAsync("accessToken");
   const username = await getUsername();
   return axios({
     method: "PUT",
@@ -63,14 +52,10 @@ export const updateUserInfo = async ({ fullName, email }: UpdateData) => {
       fullName,
       email,
     },
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
   });
 };
 
 export const changePasswordUser = async ({oldPassword, newPassword}: ChangeData) => {
-  const accessToken = await SecureStore.getItemAsync("accessToken");
   const username = await getUsername();
   return axios({
     method: "PUT",
@@ -79,8 +64,13 @@ export const changePasswordUser = async ({oldPassword, newPassword}: ChangeData)
       oldPassword,
       newPassword,
     },
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+  });
+};
+
+export const getMessage = async () => {
+  const username = await getUsername();
+  return axios({
+    method: "GET",
+    url: BASE_URL.concat(`/${username}/message`),
   });
 };

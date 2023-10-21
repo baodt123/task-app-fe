@@ -6,42 +6,63 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { changePasswordUser } from "../../services/user";
 import { SafeAreaView } from "react-navigation";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { DrawerActions } from "@react-navigation/native";
+import { ToastAlert } from "../../components/ToastAlert";
 
 const ChangePasswordScreen = ({ navigation }) => {
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
-  const validationSchema = Yup.object().shape({
-    oldPassword: Yup.string()
-      .min(8, "At least 8 characters!")
-      .required("Required!"),
-    newPassword: Yup.string()
-      .min(8, "At least 8 characters!")
-      .required("Required!"),
-    rePassword: Yup.string()
-      .oneOf([Yup.ref("newPassword"), null], "Not match!")
-      .required("Required!"),
-  });
 
-  const formik = useFormik({
-    initialValues: {
-      oldPassword: "",
-      newPassword: "",
-      rePassword: "",
-    },
-    validationSchema,
-    onSubmit: async (values) => {
-      try {
-        const response = await changePasswordUser(values);
-        console.log(response);
-        navigation.navigate("Profile");
-      } catch (error) {
-        console.log("Error updating user info", error);
-      }
-    },
-  });
+  const handleChange = async () => {
+    const changeData = { oldPassword, newPassword };
+    if (!changeData.oldPassword) {
+      ToastAlert("error", "Error", "Password is required!");
+      return;
+    }
+
+    if (changeData.oldPassword.length < 8) {
+      ToastAlert(
+        "error",
+        "Error",
+        "Password must be at least 8 characters long!"
+      );
+      return;
+    }
+
+    if (!changeData.newPassword) {
+      ToastAlert("error", "Error", "New password is required!");
+      return;
+    }
+
+    if (changeData.newPassword.length < 8) {
+      ToastAlert(
+        "error",
+        "Error",
+        "Password must be at least 8 characters long!"
+      );
+      return;
+    }
+
+    if (!rePassword) {
+      ToastAlert("error", "Error", "Confirm password is required!");
+      return;
+    }
+
+    if (rePassword !== changeData.newPassword) {
+      ToastAlert("error", "Error", "Confirm password do not match!");
+      return;
+    }
+    try {
+      await changePasswordUser(changeData);
+      ToastAlert("success", "Success", "Change password success!");
+      navigation.navigate("Profile");
+    } catch (error) {
+      ToastAlert("error", "Error", "Error updating user info");
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
@@ -59,15 +80,10 @@ const ChangePasswordScreen = ({ navigation }) => {
           <TextInput
             className="flex-grow font-bold"
             placeholder="Old password"
-            value={formik.values.oldPassword}
+            value={oldPassword}
             secureTextEntry={!showOldPassword}
-            onChangeText={formik.handleChange("oldPassword")}
+            onChangeText={setOldPassword}
           />
-          {formik.errors.oldPassword && (
-            <Text className="m-2 text-red-700">
-              {formik.errors.oldPassword}
-            </Text>
-          )}
           <TouchableOpacity
             onPress={() => setShowOldPassword(!showOldPassword)}>
             {showOldPassword ? (
@@ -82,15 +98,10 @@ const ChangePasswordScreen = ({ navigation }) => {
           <TextInput
             className="flex-grow font-bold"
             placeholder="New password"
-            value={formik.values.newPassword}
+            value={newPassword}
             secureTextEntry={!showNewPassword}
-            onChangeText={formik.handleChange("newPassword")}
+            onChangeText={setNewPassword}
           />
-          {formik.errors.newPassword && (
-            <Text className="m-2 text-red-700">
-              {formik.errors.newPassword}
-            </Text>
-          )}
           <TouchableOpacity
             onPress={() => setShowNewPassword(!showNewPassword)}>
             {showNewPassword ? (
@@ -105,13 +116,11 @@ const ChangePasswordScreen = ({ navigation }) => {
           <TextInput
             className="flex-grow font-bold"
             placeholder="Confirm password"
-            value={formik.values.rePassword}
+            value={rePassword}
             secureTextEntry={!showRePassword}
-            onChangeText={formik.handleChange("rePassword")}
+            onChangeText={setRePassword}
           />
-          {formik.errors.rePassword && (
-            <Text className="m-2 text-red-700">{formik.errors.rePassword}</Text>
-          )}
+
           <TouchableOpacity onPress={() => setShowRePassword(!showRePassword)}>
             {showRePassword ? (
               <Ionicons name="eye-off" size={24} color="blue" />
@@ -124,14 +133,13 @@ const ChangePasswordScreen = ({ navigation }) => {
         <View className="flex flex-row items-center justify-between my-3">
           <TouchableOpacity
             className="items-center justify-center h-12 px-8 ml-10 bg-blue-700 rounded-2xl"
-            onPress={() => formik.handleSubmit()}>
+            onPress={handleChange}>
             <Text className="text-base font-medium text-white ">Save</Text>
           </TouchableOpacity>
           <TouchableOpacity
             className="items-center justify-center h-12 px-6 mr-10 bg-blue-700 rounded-2xl"
             onPress={() => {
-              formik.resetForm();
-              navigation.navigate("Profile");
+              navigation.goBack();
             }}>
             <Text className="text-base font-medium text-white ">Cancel</Text>
           </TouchableOpacity>

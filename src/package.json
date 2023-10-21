@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "7.2.0",
+    "@react-native-picker/picker": "2.4.10",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/drawer": "^6.6.4",
     "@react-navigation/elements": "^1.3.19",
@@ -27,14 +29,14 @@
     "nativewind": "^2.0.11",
     "prettier-plugin-nativewind": "^0.2.3",
     "react": "18.2.0",
-    "react-native": "0.72.5",
-    "react-native-calendar": "^0.13.1",
-    "react-native-calendars": "^1.1301.0",
+    "react-native": "0.72.6",
     "react-native-gesture-handler": "~2.12.0",
     "react-native-reanimated": "~3.3.0",
     "react-native-screens": "~3.22.0",
+    "react-native-toast-message": "^2.1.6",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
+    "react-select": "^5.7.7",
     "yup": "^1.3.2"
   },
   "devDependencies": {

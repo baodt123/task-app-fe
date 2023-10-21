@@ -7,9 +7,6 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import * as SecureStore from "expo-secure-store";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import {
   addTokenToAxios,
   getAccessToken,
@@ -18,42 +15,41 @@ import {
 } from "../../services/auth";
 import { Ionicons } from "@expo/vector-icons";
 import { setUsername } from "../../services/user";
+import { ToastAlert } from "../../components/ToastAlert";
 
 const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
 
-  const validationSchema = Yup.object().shape({
-    username: Yup.string()
-      .min(5, "At least 5 characters!")
-      .required("Required!"),
-    password: Yup.string()
-      .min(8, "At least 8 characters!")
-      .required("Required!"),
-  });
+  const handleLogin = async () => {
+    const loginRequest = {
+      username: name,
+      password,
+    };
 
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    validationSchema,
-    onSubmit: async (values) => {
-      try {
-        const loginResponse = await loginApi(values);
-        const { data } = loginResponse;
-        console.log(data);
-        const result = await setAccessToken(data.accessToken);
-        if (result) {
-          const username = await setUsername(data.username);
-          navigation.navigate("Stack");
-        } else {
-          alert("Error when login");
-        }
-      } catch (err) {
-        alert("Invalid username or password");
+    if (name ==="") {
+      ToastAlert("error", "Error", "Username required!");
+      return;
+    }
+    if (password === "") {
+      ToastAlert("error", "Error", "Password required!");
+      return;
+    }
+    try {
+      const response = await loginApi(loginRequest);
+      const result = await setAccessToken(response.data.accessToken);
+      if (result) {
+        const username = await setUsername(response.data.username);
+        ToastAlert("success", "Hello", "What are you doing today?");
+        navigation.navigate("Stack");
+      } else {
+        ToastAlert("error", "Error", "Error when login");
       }
-    },
-  });
+    } catch (error) {
+      ToastAlert("error", "Error", "Invalid username or password");
+    }
+  };
 
   useEffect(() => {
     checkAuthenticated();
@@ -82,24 +78,18 @@ const LoginScreen = ({ navigation }) => {
           <TextInput
             className="flex-grow font-bold"
             placeholder="Username"
-            value={formik.values.username}
-            onChangeText={formik.handleChange("username")}
+            value={name}
+            onChangeText={setName}
           />
-          {formik.errors.username && (
-            <Text className="m-2 text-red-700">{formik.errors.username}</Text>
-          )}
         </View>
         <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Password"
-            value={formik.values.password}
+            value={password}
             secureTextEntry={!showPassword}
-            onChangeText={formik.handleChange("password")}
+            onChangeText={setPassword}
           />
-          {formik.errors.password && (
-            <Text className="m-2 text-red-700">{formik.errors.password}</Text>
-          )}
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             {showPassword ? (
               <Ionicons name="eye-off" size={24} color="blue" />
@@ -116,7 +106,7 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          onPress={() => formik.handleSubmit()}
+          onPress={handleLogin}
           className="flex flex-row items-center justify-center h-12 px-6 bg-blue-700 rounded-xl ">
           <View className="flex items-center flex-1">
             <Text className="text-base font-medium text-white ">Login</Text>

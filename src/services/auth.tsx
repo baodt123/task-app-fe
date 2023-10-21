@@ -7,6 +7,7 @@ interface RegisterData {
   username: string;
   email: string;
   password: string;
+  rePassword: string;
 }
 
 interface LoginData {
@@ -14,15 +15,11 @@ interface LoginData {
   password: string;
 }
 
-export const registerApi = ({ username, email, password }: RegisterData) => {
+export const registerApi = (register: RegisterData) => {
   return axios({
     method: "POST",
     url: BASE_URL.concat("/register"),
-    data: {
-      username,
-      email,
-      password,
-    },
+    data: register
   });
 };
 

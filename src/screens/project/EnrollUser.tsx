@@ -76,7 +76,7 @@ const EnrollUser = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
           data={projects}
-          contentContainerStyle={{ paddingBottom: 10 }}
+          contentContainerStyle={{ paddingBottom: 30 }}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity

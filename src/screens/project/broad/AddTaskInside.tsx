@@ -38,8 +38,8 @@ const AddTaskInside = ({ route, navigation }) => {
       endDate: addOneDay(new Date(end)),
       priority,
     };
-    if(!taskRequest.name){
-      ToastAlert("error", "Error", "Name is required!");
+    if(!taskRequest.name || taskRequest.name.length > 13 ){
+      ToastAlert("error", "Error", "Name is required and less than 13!");
       return;
     }
     if (taskRequest.startDate > taskRequest.endDate) {

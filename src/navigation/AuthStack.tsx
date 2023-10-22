@@ -5,7 +5,6 @@ import WelcomeScreen from "../screens/auth/WelcomeScreen";
 import LoginScreen from "../screens/auth/LoginScreen";
 import RegisterScreen from "../screens/auth/RegisterScreen";
 import DrawerStack from "./DrawerStack";
-import ChangePasswordScreen from "../screens/user/ChangePasswordScreen";
 import ProfileScreen from "../screens/user/ProfileScreen";
 import AddProjectScreen from "../screens/project/AddProjectScreen";
 import ProjectScreen from "../screens/project/ProjectScreen";

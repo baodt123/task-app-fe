@@ -5,12 +5,16 @@ import {
   TouchableOpacity,
   SafeAreaView,
   FlatList,
+  Alert,
+  BackHandler,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { getProjectsApi } from "../services/project";
 import { getTaskByAssigneeUser } from "../services/task";
 import Line from "../components/Line";
-import { DrawerActions } from "@react-navigation/native";
+import { DrawerActions, useFocusEffect } from "@react-navigation/native";
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
 
 const HomeScreen = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
@@ -47,6 +51,37 @@ const HomeScreen = ({ navigation }) => {
 
     return () => unsubscribe();
   }, [navigation]);
+  const handleLogout = async () => {
+    try {
+      await SecureStore.deleteItemAsync("accessToken");
+      axios.defaults.headers.common["Authorization"] = null;
+    } catch (error) {
+      console.log("error when remove token", error);
+    }
+    navigation.navigate("LoginScreen");
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert("Exit", "Are you sure to log out?", [
+          {
+            text: "No",
+            onPress: () => null,
+            style: "cancel",
+          },
+          { text: "Yes", onPress: handleLogout },
+        ]);
+
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [])
+  );
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">

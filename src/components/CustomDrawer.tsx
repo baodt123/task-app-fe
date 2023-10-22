@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Alert, BackHandler } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -38,27 +38,6 @@ const CustomDrawer = (props) => {
     }
     props.navigation.navigate("LoginScreen");
   };
-
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert("Exit", "Are you sure to log out?", [
-        {
-          text: "No",
-          onPress: () => null,
-          style: "cancel",
-        },
-        { text: "Yes", onPress: handleLogout },
-      ]);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
-  }, []);
 
   return (
     <View className="flex-1">

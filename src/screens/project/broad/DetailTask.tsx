@@ -164,7 +164,6 @@ const DetailTask = ({ route, navigation }) => {
     const choice = {
       status: newStatus,
     };
-    console.log(choice);
     try {
       await changeStatusTask(choice, item.id);
       ToastAlert("success", "Success", "Change status success!");
@@ -174,7 +173,7 @@ const DetailTask = ({ route, navigation }) => {
     }
   };
 
-  const handleDelete =async () => {
+  const handleDelete = async () => {
     try {
       await deleteTask(item.id);
       ToastAlert("success", "Success", "Delete task success!");
@@ -223,7 +222,6 @@ const DetailTask = ({ route, navigation }) => {
               className="mr-3"
               onPress={() => {
                 setIsEditing(false);
-                navigation.goBack();
               }}>
               <FontAwesome5 name="window-close" size={24} color="blue" />
             </TouchableOpacity>

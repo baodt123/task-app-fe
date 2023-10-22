@@ -32,9 +32,13 @@ const ProjectDetailScreen = ({route, navigation}) => {
             return;
         }
 
-        if (ProjectData.name.length < 3) {
-            ToastAlert("error", "Error", "Name must be at least 3 characters long!");
-            return;
+        if (ProjectData.name.length < 3 || ProjectData.name.length > 13) {
+          ToastAlert(
+            "error",
+            "Error",
+            "Name must be between 3 and 13 characters long!"
+          );
+          return;
         }
         try {
             await updateProjectApi(project.id, ProjectData);
@@ -78,7 +82,7 @@ const ProjectDetailScreen = ({route, navigation}) => {
             className="flex flex-row items-center justify-center">
             <FontAwesome5 name="arrow-left" size={24} color="blue" />
             <Text className="ml-4 text-2xl font-semibold text-blue-700">
-              {project.name}
+              {name}
             </Text>
           </TouchableOpacity>
           <View className="flex flex-row">

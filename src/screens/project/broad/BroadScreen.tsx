@@ -15,7 +15,6 @@ import {
 } from "../../../services/task";
 import {FontAwesome5} from '@expo/vector-icons';
 import {getProjectById} from "../../../services/project";
-import {ToastAlert} from "../../../components/ToastAlert";
 import Line from "../../../components/Line";
 
 const BroadScreen = ({route, navigation}) => {
@@ -141,13 +140,13 @@ const BroadScreen = ({route, navigation}) => {
     const StageFlatList = ({ item }) => {
       if (item.data.length === 0) {
         return (
-          <View className="mx-1 mt-2 bg-gray-200 w-96 h-fit rounded-xl">
+          <View className="w-screen mt-2 bg-gray-200 rounded-xl">
             <View className="items-start justify-center">
               <Text className="mx-4 mt-1 mb-2 text-lg font-semibold">
                 {item.title} - {item.data.length}
               </Text>
             </View>
-            <View className="items-center justify-center bg-white h-5/6 rounded-xl p-3 mx-4 my-1.5">
+            <View className="items-center justify-center bg-white rounded-xl p-3 mx-4 my-1.5">
               <Text className="text-lg font-medium text-gray-300">None</Text>
             </View>
           </View>
@@ -155,7 +154,7 @@ const BroadScreen = ({route, navigation}) => {
       }
 
       return (
-        <View className="mx-1 mt-2 bg-gray-200 w-96 h-fit rounded-xl">
+        <View className="w-screen mt-2 bg-gray-200 h-fit rounded-xl">
           <View className="items-start justify-center">
             <Text className="mx-4 mt-1 mb-2 text-lg font-semibold">
               {item.title} - {item.data.length}
@@ -198,46 +197,48 @@ const BroadScreen = ({route, navigation}) => {
 
 
     return (
-        <SafeAreaView className="flex-1 pt-12 ">
-            <View className="flex flex-row items-center justify-between mx-6 ">
-                <TouchableOpacity
-                    onPress={() => navigation.goBack()}
-                    className="flex flex-row items-center justify-center">
-                    <FontAwesome5 name="arrow-left" size={24} color="blue"/>
-                    <Text className="ml-4 text-2xl font-semibold text-blue-700">{name}</Text>
-                </TouchableOpacity>
-                <View className="flex flex-row">
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("MemberScreen", {project})}
-                        className="mr-3">
-                        <FontAwesome5 name="user-friends" size={24} color="blue"/>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("DetailScreen", {project})}
-                        className="mr-3">
-                        <FontAwesome5 name="info" size={24} color="blue"/>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("AddTaskInside", {project})}
-                        className="mr-3">
-                        <FontAwesome5 name="plus" size={24} color="blue"/>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <Line/>
-            <View className="flex-1 bg-gray-200">
-                <FlatList
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    nestedScrollEnabled
-                    pagingEnabled={true}
-                    contentContainerStyle={{}}
-                    data={Stage}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({item, index}) => <StageFlatList item={item}/>}
-                />
-            </View>
-        </SafeAreaView>
+      <SafeAreaView className="flex-1 pt-12 ">
+        <View className="flex flex-row items-center justify-between mx-6 ">
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            className="flex flex-row items-center justify-center">
+            <FontAwesome5 name="arrow-left" size={24} color="blue" />
+            <Text className="ml-4 text-2xl font-semibold text-blue-700">
+              {name}
+            </Text>
+          </TouchableOpacity>
+          <View className="flex flex-row">
+            <TouchableOpacity
+              onPress={() => navigation.navigate("MemberScreen", { project })}
+              className="mr-3">
+              <FontAwesome5 name="user-friends" size={24} color="blue" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("DetailScreen", { project })}
+              className="mr-3">
+              <FontAwesome5 name="info" size={24} color="blue" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("AddTaskInside", { project })}
+              className="mr-3">
+              <FontAwesome5 name="plus" size={24} color="blue" />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Line />
+        <View className="flex-1 bg-gray-200">
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            nestedScrollEnabled
+            pagingEnabled={true}
+            contentContainerStyle={{}}
+            data={Stage}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item, index }) => <StageFlatList item={item} />}
+          />
+        </View>
+      </SafeAreaView>
     );
 };
 

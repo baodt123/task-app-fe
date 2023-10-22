@@ -97,3 +97,11 @@ export const findProjectUserNotIn = async () => {
     url: BASE_URL.concat(`/all/${username}`),
   });
 };
+
+export const outProject = async (id: any) => {
+  const username = await getUsername();
+  return axios({
+    method: "POST",
+    url: BASE_URL.concat(`/${id}/out/${username}`),
+  });
+};

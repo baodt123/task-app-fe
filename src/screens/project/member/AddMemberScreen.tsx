@@ -6,11 +6,13 @@ import {
   FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import {
   addMemberToProject,
   findUsersNotInProject,
 } from "../../../services/project";
+import Line from "../../../components/Line";
+import { ToastAlert } from "../../../components/ToastAlert";
 
 const AddMemberScreen = ({ route, navigation }) => {
   const { project } = route.params;
@@ -37,6 +39,7 @@ const AddMemberScreen = ({ route, navigation }) => {
   const handleAddMember = async (id: any, username: string) => {
     try {
       await addMemberToProject(id, username);
+      ToastAlert("success", "Success", "New member was added to project!");
       navigation.navigate("MemberScreen", { project });
     } catch (error) {
       console.log(error);
@@ -46,23 +49,33 @@ const AddMemberScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">
-          {project.name}
-        </Text>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          className="flex flex-row items-center justify-center">
+          <FontAwesome5 name="arrow-left" size={22} color="blue" />
+          <Text className="ml-4 text-2xl font-semibold text-blue-700">
+            {project.name}
+          </Text>
+        </TouchableOpacity>
       </View>
-      <View className="h-0.5 mt-3 bg-gray-200"></View>
-      <View className="mx-6">
-        <Text className="mb-6 text-base">Add user to project</Text>
+      <Line />
+      <View className="mx-6 ">
+        <Text className="my-3 text-lg font-bold">
+          Add user to project - {members.length}
+        </Text>
         <FlatList
+          showsVerticalScrollIndicator={false}
+          nestedScrollEnabled
+          contentContainerStyle={{ paddingBottom: 120 }}
           data={members}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              className="flex flex-row items-center mb-4"
+              className="flex flex-row items-center p-3 my-1.5 bg-white rounded-lg"
               onPress={() => handleAddMember(project.id, item.username)}>
-              <MaterialCommunityIcons
-                name="penguin"
-                size={30}
+              <FontAwesome5
+                name="user-plus"
+                size={24}
                 color={getColor(index)}
               />
               <Text className="ml-3 text-lg font-medium ">{item.username}</Text>

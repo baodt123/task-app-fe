@@ -1,35 +1,36 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
-  ImageBackground,
-  Image,
   TouchableOpacity,
 } from "react-native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { getUserInfo } from "../services/user";
-import { getAccessToken } from "../services/auth";
 import * as SecureStore from "expo-secure-store";
+import Line from "./Line";
 
 const CustomDrawer = (props) => {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [fullName, setFullName] = useState("");
 
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      try {
-        const response = await getUserInfo();
-        setUsername(response.data.username);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    useEffect(() => {
+      const unsubscribe = props.navigation.addListener("focus", () => {
+        getUserInfo()
+          .then((response) => {
+            setName(response.data.username);
+            setFullName(response.data.fullName);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
 
-    fetchUserInfo();
-  }, []);
+      return () => unsubscribe();
+    }, [props.navigation]);
 
   const handleLogout = async () => {
     try {
@@ -41,19 +42,20 @@ const CustomDrawer = (props) => {
   };
   return (
     <View className="flex-1">
-      <View className="justify-center px-2 mt-10 -mb-6">
-        <MaterialCommunityIcons name="penguin" size={100} color="blue" />
-        <Text className="px-4 text-lg font-bold text-blue-700">
-          @{username}
-        </Text>
+      <View className="flex flex-row px-2 mt-10 ml-2 -mb-6">
+        <FontAwesome5 name="user-astronaut" size={100} color="blue" />
+        <View className="flex flex-col items-start justify-center">
+          <Text className="px-4 text-lg font-bold ">{fullName}</Text>
+          <Text className="px-4 text-base font-base ">@{name}</Text>
+        </View>
       </View>
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
-      <View className="h-0.5 bg-gray-200"></View>
+      <Line />
       <TouchableOpacity onPress={handleLogout} style={{ paddingVertical: 15 }}>
         <View className="flex flex-row px-4">
-          <MaterialCommunityIcons name="logout" size={24} color="black" />
+          <FontAwesome5 name="sign-out-alt" size={24} color="black" />
           <Text
             style={{
               fontSize: 16,

@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { registerApi } from "../../services/auth";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { SafeAreaView } from "react-navigation";
 import { ToastAlert } from "../../components/ToastAlert";
 
@@ -116,9 +116,9 @@ const RegisterScreen = ({ navigation }) => {
           />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             {showPassword ? (
-              <Ionicons name="eye-off" size={24} color="blue" />
+              <FontAwesome5 name="eye-slash" size={24} color="blue" />
             ) : (
-              <Ionicons name="eye" size={24} color="gray" />
+              <FontAwesome5 name="eye" size={24} color="gray" />
             )}
           </TouchableOpacity>
         </View>
@@ -132,9 +132,9 @@ const RegisterScreen = ({ navigation }) => {
           />
           <TouchableOpacity onPress={() => setShowRePassword(!showRePassword)}>
             {showRePassword ? (
-              <Ionicons name="eye-off" size={24} color="blue" />
+              <FontAwesome5 name="eye-slash" size={22} color="blue" />
             ) : (
-              <Ionicons name="eye" size={24} color="gray" />
+              <FontAwesome5 name="eye" size={22} color="gray" />
             )}
           </TouchableOpacity>
         </View>

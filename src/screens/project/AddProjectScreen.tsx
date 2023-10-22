@@ -8,6 +8,8 @@ import {
 import React, { useState } from "react";
 import { createProjectApi } from "../../services/project";
 import { ToastAlert } from "../../components/ToastAlert";
+import { FontAwesome5 } from "@expo/vector-icons";
+import Line from "../../components/Line";
 
 const AddProjectScreen = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -25,11 +27,7 @@ const AddProjectScreen = ({ navigation }) => {
     }
 
     if (ProjectData.name.length < 3) {
-      ToastAlert(
-        "error",
-        "Error",
-        "Name must be at least 3 characters long!"
-      );
+      ToastAlert("error", "Error", "Name must be at least 3 characters long!");
       return;
     }
     try {
@@ -43,16 +41,21 @@ const AddProjectScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
-      <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">Project</Text>
-      </View>
-      <View className="h-0.5 my-3 bg-gray-200"></View>
-      <View className="mx-6">
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        className="flex flex-row items-center ml-6">
+        <FontAwesome5 name="arrow-left" size={24} color="blue" />
+        <Text className="ml-4 text-2xl font-semibold text-blue-700">
+          Add new project
+        </Text>
+      </TouchableOpacity>
+      <Line/>
+      <View className="justify-center p-4 m-6 bg-gray-200 rounded-xl">
         <Text className="text-xl font-medium ">Name</Text>
         <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
           <TextInput
             className="flex-grow text-lg"
-            placeholder="Project name"
+            placeholder="Enter name"
             value={name}
             onChangeText={setName}
           />
@@ -60,7 +63,7 @@ const AddProjectScreen = ({ navigation }) => {
         <Text className="text-xl font-medium ">Description</Text>
         <TextInput
           className="py-2 mb-2 text-lg border-b border-gray-400"
-          placeholder="Description"
+          placeholder="Enter description"
           value={description}
           onChangeText={setDescription}
         />

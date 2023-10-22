@@ -5,6 +5,6 @@ export const ToastAlert = (type, text1, text2) => {
     type,
     text1,
     text2,
-    visibilityTime: 2500,
+    visibilityTime: 1500,
   });
 };

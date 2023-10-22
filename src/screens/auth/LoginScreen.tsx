@@ -13,8 +13,7 @@ import {
   loginApi,
   setAccessToken,
 } from "../../services/auth";
-import { Ionicons } from "@expo/vector-icons";
-import { setUsername } from "../../services/user";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { ToastAlert } from "../../components/ToastAlert";
 
 const LoginScreen = ({ navigation }) => {
@@ -40,7 +39,6 @@ const LoginScreen = ({ navigation }) => {
       const response = await loginApi(loginRequest);
       const result = await setAccessToken(response.data.accessToken);
       if (result) {
-        const username = await setUsername(response.data.username);
         ToastAlert("success", "Hello", "What are you doing today?");
         navigation.navigate("Stack");
       } else {
@@ -92,9 +90,9 @@ const LoginScreen = ({ navigation }) => {
           />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             {showPassword ? (
-              <Ionicons name="eye-off" size={24} color="blue" />
+              <FontAwesome5 name="eye-slash" size={22} color="blue" />
             ) : (
-              <Ionicons name="eye" size={24} color="gray" />
+              <FontAwesome5 name="eye" size={22} color="gray" />
             )}
           </TouchableOpacity>
         </View>

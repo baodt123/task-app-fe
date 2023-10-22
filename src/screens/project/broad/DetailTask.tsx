@@ -7,10 +7,9 @@ import {
   TextInput,
   FlatList,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { ToastAlert } from "../../../components/ToastAlert";
 import {
-  Status,
   changeStatusTask,
   deleteTask,
   getTaskById,
@@ -18,6 +17,7 @@ import {
 } from "../../../services/task";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
+import Line from "../../../components/Line";
 
 const DetailTask = ({ route, navigation }) => {
   const { item } = route.params;
@@ -112,7 +112,7 @@ const DetailTask = ({ route, navigation }) => {
         setAssignee(response.data.assigneeUser.username);
       })
       .catch((error) => {
-        ToastAlert("error", "Error", error);
+        console.log(error);
       });
 
     const unsubscribe = navigation.addListener("focus", () => {
@@ -128,7 +128,7 @@ const DetailTask = ({ route, navigation }) => {
           setAssignee(response.data.assigneeUser.username);
         })
         .catch((error) => {
-          ToastAlert("error", "Error", error);
+          console.log(error)
         });
     });
 
@@ -156,7 +156,6 @@ const DetailTask = ({ route, navigation }) => {
       ToastAlert("success", "Success", "Create success!");
       setIsEditing(false);
     } catch (error) {
-      console.log(error);
       ToastAlert("error", "Error", "Name already been used!");
     }
   };
@@ -168,7 +167,7 @@ const DetailTask = ({ route, navigation }) => {
     console.log(choice);
     try {
       await changeStatusTask(choice, item.id);
-      ToastAlert("success", "Success", "Create success!");
+      ToastAlert("success", "Success", "Change status success!");
       navigation.goBack();
     } catch (error) {
       ToastAlert("error", "Error", "Error when change status!");
@@ -178,11 +177,10 @@ const DetailTask = ({ route, navigation }) => {
   const handleDelete =async () => {
     try {
       await deleteTask(item.id);
-      ToastAlert("success", "Success", "Create success!");
+      ToastAlert("success", "Success", "Delete task success!");
       navigation.goBack();
     } catch (error) {
-      console.log(error);
-      ToastAlert("error", "Error", "Error when change status!");
+      ToastAlert("error", "Error", "Error when delete task!");
     }
   }
 
@@ -195,26 +193,31 @@ const DetailTask = ({ route, navigation }) => {
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">{name}</Text>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          className="flex flex-row items-center justify-center">
+          <FontAwesome5 name="arrow-left" size={24} color="blue" />
+          <Text className="ml-4 text-2xl font-semibold text-blue-700">
+            {name}
+          </Text>
+        </TouchableOpacity>
 
         {!isEditing && (
           <View className="flex flex-row">
             <TouchableOpacity
               className="mr-3"
               onPress={() => setIsEditing(true)}>
-              <AntDesign name="edit" size={24} color="blue" />
+              <FontAwesome5 name="edit" size={24} color="blue" />
             </TouchableOpacity>
-            <TouchableOpacity
-              className="mr-3"
-              onPress={handleDelete}>
-              <AntDesign name="delete" size={24} color="blue" />
+            <TouchableOpacity className="mr-3" onPress={handleDelete}>
+              <FontAwesome5 name="trash" size={24} color="blue" />
             </TouchableOpacity>
           </View>
         )}
         {isEditing && (
           <View className="flex flex-row">
             <TouchableOpacity className="mr-3" onPress={handleUpdate}>
-              <AntDesign name="check" size={24} color="blue" />
+              <FontAwesome5 name="check" size={24} color="blue" />
             </TouchableOpacity>
             <TouchableOpacity
               className="mr-3"
@@ -222,14 +225,14 @@ const DetailTask = ({ route, navigation }) => {
                 setIsEditing(false);
                 navigation.goBack();
               }}>
-              <AntDesign name="close" size={24} color="blue" />
+              <FontAwesome5 name="window-close" size={24} color="blue" />
             </TouchableOpacity>
           </View>
         )}
       </View>
-      <View className="h-0.5 my-3 bg-gray-200"></View>
+      <Line />
 
-      <View className="mx-6 bg-gray-400">
+      <View className="justify-center p-4 mx-6 my-3 bg-gray-200 rounded-xl">
         <Text className="text-xl font-medium ">Name</Text>
         {!isEditing && <Text className="py-2 mb-2 text-lg ">{name}</Text>}
         {isEditing && (
@@ -330,36 +333,43 @@ const DetailTask = ({ route, navigation }) => {
         )}
       </View>
 
-      <View className="mx-6">
-        <Text className="text-xl font-medium ">Creator</Text>
-        <Text className="text-lg">{creator}</Text>
-        <Text className="text-xl font-medium ">Assignee</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("NewMemberScreen", { item })}>
-          <Text>Here</Text>
-        </TouchableOpacity>
-        <Text className="text-lg">{assignee}</Text>
-        <View className="">
+      <View className="justify-center p-4 mx-6 mb-3 bg-gray-200 rounded-xl">
+        <View className="flex flex-row justify-between">
+          <Text className="text-xl font-medium ">Creator</Text>
+          <Text className="text-lg">{creator}</Text>
+        </View>
+        <View className="flex flex-row justify-between">
+          <Text className="text-xl font-medium ">Assignee</Text>
+          <TouchableOpacity
+            className="justify-center mr-32"
+            onPress={() => navigation.navigate("NewMemberScreen", { item })}>
+            <FontAwesome5 name="user-plus" size={18} color="blue" />
+          </TouchableOpacity>
+          <Text className="text-lg">{assignee}</Text>
+        </View>
+      </View>
+      <View className="justify-center p-4 mx-6 bg-gray-200 rounded-xl">
+        <View className="flex flex-row justify-between mb-2">
           <Text className="text-xl font-medium ">Status</Text>
           <Text className="text-lg">{status}</Text>
-          <View className="items-center justify-between">
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{}}
-              data={choice.filter((item) => item.value !== status)}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity
-                  className="m-2 bg-yellow-400"
-                  onPress={() => {
-                    setNewStatus(item.value);
-                  }}>
-                  <Text>{item.title}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </View>
+        </View>
+        <View className="items-center justify-between">
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{}}
+            data={choice.filter((item) => item.value !== status)}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                className="p-1.5 m-1 bg-blue-700 rounded-xl"
+                onPress={() => {
+                  setNewStatus(item.value);
+                }}>
+                <Text className="font-bold text-white text-md">{item.title}</Text>
+              </TouchableOpacity>
+            )}
+          />
         </View>
       </View>
     </SafeAreaView>

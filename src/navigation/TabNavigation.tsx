@@ -5,8 +5,6 @@ import HomeScreen from "../screens/HomeScreen";
 import ProjectScreen from "../screens/project/ProjectScreen";
 import TaskScreen from "../screens/task/TaskScreen";
 import NotificationScreen from "../screens/NotificationScreen";
-import { Feather } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +22,7 @@ const TabNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Feather name="home" size={26} color={focused ? "blue" : "gray"} />
+            <FontAwesome5 name="home" size={24} color={focused ? "blue" : "gray"} />
           ),
         }}
       />
@@ -33,9 +31,9 @@ const TabNavigator = () => {
         component={ProjectScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <AntDesign
-              name="folder1"
-              size={26}
+            <FontAwesome5
+              name="folder"
+              size={24}
               color={focused ? "blue" : "gray"}
             />
           ),
@@ -46,9 +44,9 @@ const TabNavigator = () => {
         component={TaskScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <AntDesign
-              name="menufold"
-              size={26}
+            <FontAwesome5
+              name="tasks"
+              size={24}
               color={focused ? "blue" : "gray"}
             />
           ),
@@ -61,7 +59,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <FontAwesome5
               name="bell"
-              size={26}
+              size={24}
               color={focused ? "blue" : "gray"}
             />
           ),

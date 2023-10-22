@@ -3,8 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import ProfileScreen from "../screens/user/ProfileScreen";
 import TabNavigator from "./TabNavigation";
-import SettingScreen from "../screens/SettingScreen";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import CustomDrawer from "../components/CustomDrawer";
 
 const Drawer = createDrawerNavigator();
@@ -18,7 +17,7 @@ const DrawerStack = () => {
         drawerActiveBackgroundColor: "blue",
         drawerActiveTintColor: "white",
         drawerLabelStyle: {
-          marginLeft: -20,
+          marginLeft: -10,
           fontSize: 16,
           fontWeight: "bold",
         },
@@ -28,7 +27,7 @@ const DrawerStack = () => {
         component={TabNavigator}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="md-home" size={24} color={color} />
+            <FontAwesome5 name="home" size={24} color={color} />
           ),
         }}
       />
@@ -37,16 +36,7 @@ const DrawerStack = () => {
         component={ProfileScreen}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="md-person-circle-outline" size={24} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Setting"
-        component={SettingScreen}
-        options={{
-          drawerIcon: ({ color }) => (
-            <Ionicons name="settings-sharp" size={24} color={color} />
+            <FontAwesome5 name="user-alt" size={24} color={color} />
           ),
         }}
       />

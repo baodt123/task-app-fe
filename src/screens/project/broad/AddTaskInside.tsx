@@ -10,6 +10,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import { createNewTask } from "../../../services/task";
 import { ToastAlert } from "../../../components/ToastAlert";
+import { FontAwesome5 } from "@expo/vector-icons";
+import Line from "../../../components/Line";
+
 
 const AddTaskInside = ({ route, navigation }) => {
   const { project } = route.params;
@@ -45,8 +48,7 @@ const AddTaskInside = ({ route, navigation }) => {
     }
     try {
       await createNewTask(project.id, taskRequest);
-      ToastAlert("success", "Success", "Create success!");
-      console.log(new Date().toDateString());
+      ToastAlert("success", "Success", "Create task success!");
       navigation.goBack();
     } catch (error) {
       ToastAlert("error", "Error", "Name already been used!");
@@ -86,11 +88,16 @@ const AddTaskInside = ({ route, navigation }) => {
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
-      <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">Task</Text>
-      </View>
-      <View className="h-0.5 my-3 bg-gray-200"></View>
-      <View className="mx-6">
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        className="flex flex-row items-center ml-6">
+        <FontAwesome5 name="arrow-left" size={24} color="blue" />
+        <Text className="ml-4 text-2xl font-semibold text-blue-700">
+          Create new task
+        </Text>
+      </TouchableOpacity>
+      <Line />
+      <View className="justify-center p-4 m-6 bg-gray-200 rounded-xl">
         <Text className="text-xl font-medium ">Name</Text>
         <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
           <TextInput

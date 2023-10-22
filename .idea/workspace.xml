@@ -4,8 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="fe-4: edit project, crud task (error in date)">
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="fe-5: finish all screen, ready to css">
+      <change afterPath="$PROJECT_DIR$/src/components/Line.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Context/UserContext.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CustomDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CustomDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/AuthStack.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/AuthStack.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/NotificationScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/NotificationScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/AddProjectScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/AddProjectScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/DetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/DetailScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/EnrollUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/EnrollUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/ProjectHome.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/ProjectScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/ProjectScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/BroadScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/BroadScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/DetailTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/DetailTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/member/AddMemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/member/AddMemberScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/member/MemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/member/MemberScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +56,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\doant\\Desktop\\task-app\\task-app-fe\\src\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -83,6 +98,10 @@
       <workItem from="1697297897169" duration="11000" />
       <workItem from="1697385352004" duration="367000" />
       <workItem from="1697415319121" duration="47000" />
+      <workItem from="1697878611398" duration="154000" />
+      <workItem from="1697897885976" duration="1067000" />
+      <workItem from="1697898971096" duration="5422000" />
+      <workItem from="1697937890174" duration="34000" />
     </task>
     <task id="LOCAL-00001" summary="fe-1">
       <option name="closed" value="true" />
@@ -140,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697385415626</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fe-5: finish all screen, ready to css">
+      <option name="closed" value="true" />
+      <created>1697878697327</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697878697327</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,6 +195,7 @@
     <MESSAGE value="fe-2" />
     <MESSAGE value="fe-3: edit user, add project info" />
     <MESSAGE value="fe-4: edit project, crud task (error in date)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fe-4: edit project, crud task (error in date)" />
+    <MESSAGE value="fe-5: finish all screen, ready to css" />
+    <option name="LAST_COMMIT_MESSAGE" value="fe-5: finish all screen, ready to css" />
   </component>
 </project>

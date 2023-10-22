@@ -30,10 +30,6 @@ const AuthStack = () => {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
       <Stack.Screen name="Stack" component={DrawerStack} />
-      <Stack.Screen
-        name="ChangePasswordScreen"
-        component={ChangePasswordScreen}
-      />
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
       <Stack.Screen name="ProjectScreen" component={ProjectScreen} />
       <Stack.Screen name="AddProjectScreen" component={AddProjectScreen} />

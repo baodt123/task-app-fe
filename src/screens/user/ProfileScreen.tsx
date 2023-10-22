@@ -71,9 +71,9 @@ const ProfileScreen = ({ navigation }) => {
     try {
       await changePasswordUser(changeData);
       ToastAlert("success", "Success", "Change password success!");
-      navigation.navigate("Profile");
+      setIsChange(false);
     } catch (error) {
-      ToastAlert("error", "Error", "Error updating user info");
+      ToastAlert("error", "Error", "Wrong password!");
     }
   };
   

@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   FlatList,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import { getProjectsApi } from "../../services/project";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import Line from "../../components/Line";
+import NothingFlatList from "../../components/NothingFlatList";
 
 const ProjectSeacrh = ({ navigation }) => {
   
@@ -16,14 +17,6 @@ const ProjectSeacrh = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
   
   useEffect(() => {
-    getProjectsApi()
-      .then((response) => {
-        setProjects(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
     const unsubscribe = navigation.addListener("focus", () => {
       getProjectsApi()
         .then((response) => {
@@ -44,16 +37,22 @@ const ProjectSeacrh = ({ navigation }) => {
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
-      <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">Projects</Text>
-      </View>
-      <View className="h-0.5 my-3 bg-gray-200"></View>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        className="flex flex-row items-center ml-6">
+        <FontAwesome5 name="arrow-left" size={24} color="blue" />
+        <Text className="ml-4 text-2xl font-semibold text-blue-700">
+          Add task to project
+        </Text>
+      </TouchableOpacity>
+      <Line/>
       <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
         <View className="items-start justify-center">
-          <Text className="m-4 text-base font-bold">
-            PROJECTS - {projects.length}
+          <Text className="m-4 text-lg font-bold">
+            Your projects - {projects.length}
           </Text>
         </View>
+        <NothingFlatList item={projects}/>
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
@@ -65,11 +64,7 @@ const ProjectSeacrh = ({ navigation }) => {
               onPress={() =>
                 navigation.navigate("AddTaskOutside", { project: item })
               }>
-              <MaterialCommunityIcons
-                name="penguin"
-                size={30}
-                color={getColor(index)}
-              />
+              <FontAwesome5 name="folder" size={24} color={getColor(index)} />
               <Text className="ml-3 text-lg font-medium ">{item.name}</Text>
             </TouchableOpacity>
           )}

@@ -10,6 +10,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { getProjectsApi } from "../services/project";
 import { getTaskByAssigneeUser } from "../services/task";
 import Line from "../components/Line";
+import { DrawerActions } from "@react-navigation/native";
 
 const HomeScreen = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
@@ -50,7 +51,16 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">Quick Access</Text>
+        <View className="flex flex-row items-center justify-center">
+          <TouchableOpacity
+            className="mr-3"
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <FontAwesome5 name="bars" size={24} color="blue" />
+          </TouchableOpacity>
+          <Text className="text-2xl font-semibold text-blue-700">
+            Quick Access
+          </Text>
+        </View>
       </View>
       <Line />
       <View>

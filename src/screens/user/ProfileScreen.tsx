@@ -161,14 +161,14 @@ const ProfileScreen = ({ navigation }) => {
         {!isChange && (
           <View className="justify-center p-4 mx-6 mb-6 bg-gray-200 rounded-xl">
             <View className="flex flex-row items-center justify-center m-3">
-              <Text className="w-24 ml-3 text-lg font-medium">Name</Text>
+              <Text className="mx-6 text-lg font-medium ">Name</Text>
               {!isEditing && (
                 <Text className="px-2 text-lg font-medium w-60">
                   {fullName}
                 </Text>
               )}
               {isEditing && (
-                <View className="flex flex-row items-center px-2 mr-2 border-b border-gray-400 w-60 bt-g-gray-100">
+                <View className="flex flex-row items-center w-56 px-1 mr-4 border-b border-gray-400 bt-g-gray-100">
                   <TextInput
                     className="flex-grow text-lg font-medium"
                     value={fullName}
@@ -178,12 +178,12 @@ const ProfileScreen = ({ navigation }) => {
               )}
             </View>
             <View className="flex flex-row items-center justify-center my-3 ">
-              <Text className="w-24 ml-3 text-lg font-medium">Email</Text>
+              <Text className="mx-6 text-lg font-medium">Email</Text>
               {!isEditing && (
                 <Text className="px-2 text-lg font-medium w-60">{email}</Text>
               )}
               {isEditing && (
-                <View className="flex flex-row items-center px-2 mr-2 border-b border-gray-400 w-60 bt-g-gray-100">
+                <View className="flex flex-row items-center w-56 px-1 mr-4 border-b border-gray-400 bt-g-gray-100">
                   <TextInput
                     className="flex-grow text-lg font-medium"
                     value={email}

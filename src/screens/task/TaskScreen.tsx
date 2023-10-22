@@ -10,6 +10,8 @@ import { getTaskByAssigneeUser } from "../../services/task";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Line from "../../components/Line";
 import NothingFlatList from "../../components/NothingFlatList";
+import { DrawerActions } from "@react-navigation/native";
+
 
 const IssuesScreen = ({ navigation }) => {
   const [tasks, setTasks] = useState([]);
@@ -38,7 +40,16 @@ const IssuesScreen = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">Tasks</Text>
+        <View className="flex flex-row items-center justify-center">
+          <TouchableOpacity
+            className="mr-3"
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <FontAwesome5 name="bars" size={24} color="blue" />
+          </TouchableOpacity>
+          <Text className="text-2xl font-semibold text-blue-700">
+            Task
+          </Text>
+        </View>
         <View className="flex flex-row">
           <TouchableOpacity
             onPress={() => navigation.navigate("AddTaskOutside", { tasks })}
@@ -52,7 +63,7 @@ const IssuesScreen = ({ navigation }) => {
         <View className="items-start justify-center">
           <Text className="m-4 text-lg font-bold">Tasks - {tasks.length}</Text>
         </View>
-        <NothingFlatList item={tasks}/>
+        <NothingFlatList item={tasks} />
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled

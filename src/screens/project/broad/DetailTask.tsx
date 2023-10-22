@@ -339,12 +339,14 @@ const DetailTask = ({ route, navigation }) => {
           <Text className="text-lg">{creator}</Text>
         </View>
         <View className="flex flex-row justify-between">
-          <Text className="text-xl font-medium ">Assignee</Text>
-          <TouchableOpacity
-            className="justify-center mr-32"
-            onPress={() => navigation.navigate("NewMemberScreen", { item })}>
-            <FontAwesome5 name="user-plus" size={18} color="blue" />
-          </TouchableOpacity>
+          <View className="flex flex-row">
+            <Text className="text-xl font-medium ">Assignee</Text>
+            <TouchableOpacity
+              className="justify-center ml-4"
+              onPress={() => navigation.navigate("NewMemberScreen", { item })}>
+              <FontAwesome5 name="user-plus" size={18} color="blue" />
+            </TouchableOpacity>
+          </View>
           <Text className="text-lg">{assignee}</Text>
         </View>
       </View>
@@ -366,7 +368,9 @@ const DetailTask = ({ route, navigation }) => {
                 onPress={() => {
                   setNewStatus(item.value);
                 }}>
-                <Text className="font-bold text-white text-md">{item.title}</Text>
+                <Text className="font-bold text-white text-md">
+                  {item.title}
+                </Text>
               </TouchableOpacity>
             )}
           />

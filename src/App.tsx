@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./navigation/AuthStack";
 import "react-native-gesture-handler";
-import DrawerStack from "./navigation/DrawerStack";
 import Toast, {
   ErrorToast,
   SuccessToast,
@@ -36,12 +35,11 @@ const toastConfig = {
 };
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-      <NavigationContainer>
-        {isLoggedIn ? <DrawerStack /> : <AuthStack />}
-        <Toast config={toastConfig} />
-      </NavigationContainer>
+    <NavigationContainer>
+      <AuthStack />
+      <Toast config={toastConfig} />
+    </NavigationContainer>
   );
 }
 

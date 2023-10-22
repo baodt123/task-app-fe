@@ -15,6 +15,7 @@ import {
 } from "../../services/auth";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { ToastAlert } from "../../components/ToastAlert";
+import { setUsername } from "../../services/user";
 
 const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -39,6 +40,7 @@ const LoginScreen = ({ navigation }) => {
       const response = await loginApi(loginRequest);
       const result = await setAccessToken(response.data.accessToken);
       if (result) {
+        await setUsername(response.data.username);
         ToastAlert("success", "Hello", "What are you doing today?");
         navigation.navigate("Stack");
       } else {

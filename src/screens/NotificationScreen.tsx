@@ -9,6 +9,9 @@ import React, { useEffect, useState } from "react";
 import { getMessage } from "../services/user";
 import Line from "../components/Line";
 import NothingFlatList from "../components/NothingFlatList";
+import { DrawerActions } from "@react-navigation/native";
+import { FontAwesome5 } from "@expo/vector-icons";
+
 
 const NotificationScreen = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
@@ -38,9 +41,16 @@ const NotificationScreen = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
-        <Text className="text-2xl font-semibold text-blue-700">
-          Notifications
-        </Text>
+        <View className="flex flex-row items-center justify-center">
+          <TouchableOpacity
+            className="mr-3"
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+            <FontAwesome5 name="bars" size={24} color="blue" />
+          </TouchableOpacity>
+          <Text className="text-2xl font-semibold text-blue-700">
+            Notification
+          </Text>
+        </View>
       </View>
       <Line />
       <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
@@ -49,7 +59,7 @@ const NotificationScreen = ({ navigation }) => {
             Messages - {messages.length}
           </Text>
         </View>
-        <NothingFlatList item={messages}/>
+        <NothingFlatList item={messages} />
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled

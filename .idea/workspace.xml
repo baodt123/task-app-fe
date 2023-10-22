@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="fe-6: fix css" />
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="fix css" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,6 +87,7 @@
       <workItem from="1697898971096" duration="5422000" />
       <workItem from="1697937890174" duration="34000" />
       <workItem from="1697964672421" duration="89000" />
+      <workItem from="1697968726673" duration="73000" />
     </task>
     <task id="LOCAL-00001" summary="fe-1">
       <option name="closed" value="true" />
@@ -160,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697964754131</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix css">
+      <option name="closed" value="true" />
+      <created>1697968791544</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1697968791544</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +199,7 @@
     <MESSAGE value="fe-4: edit project, crud task (error in date)" />
     <MESSAGE value="fe-5: finish all screen, ready to css" />
     <MESSAGE value="fe-6: fix css" />
-    <option name="LAST_COMMIT_MESSAGE" value="fe-6: fix css" />
+    <MESSAGE value="fix css" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix css" />
   </component>
 </project>

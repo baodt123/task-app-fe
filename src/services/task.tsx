@@ -23,10 +23,12 @@ export interface TaskRequest {
   startDate: Date;
   endDate: Date;
   priority: Priority;
+  username: any;
 }
 
 export interface Choice {
   status: Status
+  username: any
 }
 
 export const getTaskById = async (id: any) => {
@@ -45,12 +47,6 @@ export const createNewTask = async (id: any, task: TaskRequest) => {
   });
 };
 
-export const getBacklogTasksByProjectId = async (id: any) => {
-  return axios({
-    method: "GET",
-    url: BASE_URL.concat(`/backlog/${id}/project`),
-  });
-};
 
 export const getTodoTasksByProjectId = async (id: any) => {
   return axios({
@@ -97,9 +93,11 @@ export const changeStatusTask = async (choice: Choice, taskId: any) => {
 };
 
 export const assigneeMemberToTask = async (taskId: any, username: string) => {
+  const name = await getUsername();
   return axios({
     method: "POST",
     url: BASE_URL.concat(`/${taskId}/assignee/${username}`),
+    data: name,
   });
 };
 
@@ -112,8 +110,10 @@ export const getTaskByAssigneeUser = async () => {
 };
 
 export const deleteTask = async (id: any) => {
+  const username = await getUsername();
   return axios({
-    method: "DELETE",
+    method: "POST",
     url: BASE_URL.concat(`/${id}/delete`),
+    data: username,
   });
 };

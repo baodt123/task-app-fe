@@ -10,20 +10,14 @@ import {
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { getProjectsApi } from "../services/project";
-import { getTaskByAssigneeUser } from "../services/task";
 import Line from "../components/Line";
 import { DrawerActions, useFocusEffect } from "@react-navigation/native";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
+import NothingFlatList from "../components/NothingFlatList";
 
 const HomeScreen = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
-  const [tasks, setTasks] = useState([]);
-  const [something, setSomething] = useState([]);
-  const colors = ["blue", "red", "green", "purple", "cyan", "orange"];
-  const getColor = (index) => {
-    return colors[index % colors.length];
-  };
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       getProjectsApi()
@@ -38,19 +32,11 @@ const HomeScreen = ({ navigation }) => {
     return () => unsubscribe();
   }, [navigation]);
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      getTaskByAssigneeUser()
-        .then((response) => {
-          setTasks(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
+  const colors = ["blue", "red", "green", "orange"];
+  const getColor = (index) => {
+    return colors[index % colors.length];
+  };
 
-    return () => unsubscribe();
-  }, [navigation]);
   const handleLogout = async () => {
     try {
       await SecureStore.deleteItemAsync("accessToken");
@@ -82,89 +68,133 @@ const HomeScreen = ({ navigation }) => {
         BackHandler.removeEventListener("hardwareBackPress", onBackPress);
     }, [])
   );
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
-      <View className="flex flex-row items-center justify-between mx-6 ">
+      <View className="flex flex-row items-center justify-between mx-6">
         <View className="flex flex-row items-center justify-center">
           <TouchableOpacity
             className="mr-3"
             onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <FontAwesome5 name="bars" size={24} color="blue" />
+            <FontAwesome5 name="bars" size={20} color="blue" />
           </TouchableOpacity>
-          <Text className="text-2xl font-semibold text-blue-700">
-            Quick Access
-          </Text>
+          <Text className="text-xl font-semibold text-blue-700">Activity</Text>
         </View>
       </View>
       <Line />
-      <View>
+      <View className="mx-3">
+        <View className="items-start justify-center">
+          <Text className="mx-3 my-2 text-lg font-semibold">
+            Today streams -{" "}
+            {
+              projects
+                .filter((project) => {
+                  const todayStreams = project.streams.filter((stream) => {
+                    const streamDate = new Date(stream.time);
+                    streamDate.setHours(0, 0, 0, 0);
+                    return streamDate.getTime() === today.getTime();
+                  });
+                  return todayStreams.length > 0;
+                })
+                .sort((a, b) => {
+                  const aLatestStreamTime = new Date(
+                    a.streams[a.streams.length - 1].time
+                  );
+                  const bLatestStreamTime = new Date(
+                    b.streams[b.streams.length - 1].time
+                  );
+                  return bLatestStreamTime - aLatestStreamTime;
+                }).length
+            }
+          </Text>
+        </View>
+        <NothingFlatList
+          item={projects
+            .filter((project) => {
+              const todayStreams = project.streams.filter((stream) => {
+                const streamDate = new Date(stream.time);
+                streamDate.setHours(0, 0, 0, 0);
+                return streamDate.getTime() === today.getTime();
+              });
+              return todayStreams.length > 0;
+            })
+            .sort((a, b) => {
+              const aLatestStreamTime = new Date(
+                a.streams[a.streams.length - 1].time
+              );
+              const bLatestStreamTime = new Date(
+                b.streams[b.streams.length - 1].time
+              );
+              return bLatestStreamTime - aLatestStreamTime;
+            })}
+        />
         <FlatList
-          data={something}
-          renderItem={({ item, index }) => <View></View>}
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
-          contentContainerStyle={{ paddingBottom: 80 }}
-          ListHeaderComponent={
-            <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
-              <View className="items-start justify-center">
-                <Text className="m-4 text-lg font-bold">
-                  Projects - {projects.length}
-                </Text>
-              </View>
-              <FlatList
-                showsVerticalScrollIndicator={false}
-                nestedScrollEnabled
-                data={projects}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    className="flex flex-row items-center p-3 m-1.5 bg-white rounded-lg"
-                    onPress={() =>
-                      navigation.navigate("BroadScreen", { project: item })
-                    }>
-                    <FontAwesome5
-                      name="folder-open"
-                      size={24}
-                      color={getColor(index)}
-                    />
-                    <Text className="ml-3 text-lg font-medium ">
-                      {item.name}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              />
+          contentContainerStyle={{ paddingBottom: 100 }}
+          data={projects
+            .filter((project) => {
+              const todayStreams = project.streams.filter((stream) => {
+                const streamDate = new Date(stream.time);
+                streamDate.setHours(0, 0, 0, 0);
+                return streamDate.getTime() === today.getTime();
+              });
+              return todayStreams.length > 0;
+            })
+            .sort((a, b) => {
+              const aLatestStreamTime = new Date(
+                a.streams[a.streams.length - 1].time
+              );
+              const bLatestStreamTime = new Date(
+                b.streams[b.streams.length - 1].time
+              );
+              return bLatestStreamTime - aLatestStreamTime;
+            })}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item, index }) => (
+            <View className="flex flex-col p-3 mx-3 my-1 bg-white rounded-lg">
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("BroadScreen", { project: item })
+                }>
+                <View className="flex flex-row items-center px-2 mb-2">
+                  <FontAwesome5
+                    name="folder-minus"
+                    size={20}
+                    color={getColor(index)}
+                  />
+                  <Text className="ml-2 text-base font-semibold">
+                    {item.name}
+                  </Text>
+                </View>
+                <FlatList
+                  data={item.streams
+                    .filter((stream) => {
+                      const streamDate = new Date(stream.time);
+                      streamDate.setHours(0, 0, 0, 0);
+                      return streamDate.getTime() === today.getTime();
+                    })
+                    .slice(-5)
+                    .reverse()}
+                  keyExtractor={(stream) => stream.id.toString()}
+                  renderItem={({ item }) => (
+                    <View className="flex flex-col px-3 py-1 mx-2 my-1 bg-gray-100 rounded-lg">
+                      <View className="flex flex-row">
+                        <Text className="text-sm">{item.message}</Text>
+                      </View>
+                      <View className="items-end">
+                        <Text className="items-end text-sm text-gray-500">
+                          {item.time}
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                />
+              </TouchableOpacity>
             </View>
-          }
-          ListFooterComponent={
-            <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
-              <View className="items-start justify-center">
-                <Text className="m-4 text-lg font-bold">
-                  Tasks - {tasks.length}
-                </Text>
-              </View>
-              <FlatList
-                showsVerticalScrollIndicator={false}
-                nestedScrollEnabled
-                data={tasks}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    className="flex flex-row items-center p-3 m-1.5 bg-white rounded-lg"
-                    onPress={() => navigation.navigate("DetailTask", { item })}>
-                    <FontAwesome5
-                      name="bookmark"
-                      size={24}
-                      color={getColor(index)}
-                    />
-                    <Text className="ml-3 text-lg font-medium ">
-                      {item.name}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          }
+          )}
         />
       </View>
     </SafeAreaView>

@@ -42,7 +42,7 @@ const CustomDrawer = (props) => {
   return (
     <View className="flex-1">
       <View className="flex flex-row px-2 mt-10 ml-2 -mb-6">
-        <FontAwesome5 name="user-astronaut" size={100} color="blue" />
+        <FontAwesome5 name="user-circle" size={50} color="blue" />
         <View className="flex flex-col items-start justify-center">
           <Text className="px-4 text-lg font-bold ">{fullName}</Text>
           <Text className="px-4 text-base font-base ">@{name}</Text>
@@ -54,7 +54,7 @@ const CustomDrawer = (props) => {
       <Line />
       <TouchableOpacity onPress={handleLogout} style={{ paddingVertical: 15 }}>
         <View className="flex flex-row px-4">
-          <FontAwesome5 name="sign-out-alt" size={24} color="black" />
+          <FontAwesome5 name="sign-out-alt" size={20} color="black" />
           <Text
             style={{
               fontSize: 16,

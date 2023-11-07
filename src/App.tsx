@@ -6,6 +6,8 @@ import Toast, {
   ErrorToast,
   SuccessToast,
 } from "react-native-toast-message";
+import registerNNPushToken from "native-notify";
+import NotificationProvider from "./notif/NotificationProvider"
 
 const toastConfig = {
   success: (props) => (
@@ -35,11 +37,12 @@ const toastConfig = {
 };
 
 function App() {
+  registerNNPushToken(14450, "bQ8g7WgDaaYTzGRhM2I0ID");
   return (
-    <NavigationContainer>
-      <AuthStack />
-      <Toast config={toastConfig} />
-    </NavigationContainer>
+      <NavigationContainer>
+        <AuthStack />
+        <Toast config={toastConfig} />
+      </NavigationContainer>
   );
 }
 

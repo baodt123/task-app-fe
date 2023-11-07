@@ -13,7 +13,6 @@ import { ToastAlert } from "../../../components/ToastAlert";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Line from "../../../components/Line";
 
-
 const AddTaskInside = ({ route, navigation }) => {
   const { project } = route.params;
   const [name, setName] = useState("");
@@ -29,7 +28,7 @@ const AddTaskInside = ({ route, navigation }) => {
   function addOneDay(date: Date): Date {
     return new Date(date.setDate(date.getDate() + 1));
   }
-  
+
   const handleCreateTask = async () => {
     const taskRequest = {
       name,
@@ -38,7 +37,7 @@ const AddTaskInside = ({ route, navigation }) => {
       endDate: addOneDay(new Date(end)),
       priority,
     };
-    if(!taskRequest.name || taskRequest.name.length > 13 ){
+    if (!taskRequest.name || taskRequest.name.length > 13) {
       ToastAlert("error", "Error", "Name is required and less than 13!");
       return;
     }
@@ -54,7 +53,6 @@ const AddTaskInside = ({ route, navigation }) => {
       ToastAlert("error", "Error", "Name already been used!");
     }
   };
-
 
   const toggleStartPicker = () => {
     setShowStartPicker(!showStartPicker);
@@ -91,8 +89,8 @@ const AddTaskInside = ({ route, navigation }) => {
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         className="flex flex-row items-center ml-6">
-        <FontAwesome5 name="arrow-left" size={24} color="blue" />
-        <Text className="ml-4 text-2xl font-semibold text-blue-700">
+        <FontAwesome5 name="arrow-left" size={20} color="blue" />
+        <Text className="ml-3 text-xl font-semibold text-blue-700">
           Create new task
         </Text>
       </TouchableOpacity>

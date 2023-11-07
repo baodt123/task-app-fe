@@ -8,6 +8,7 @@ import {
   FlatList,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { ToastAlert } from "../../../components/ToastAlert";
 import {
   changeStatusTask,
@@ -18,6 +19,7 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import Line from "../../../components/Line";
+import { getUsername } from "../../../services/user";
 
 const DetailTask = ({ route, navigation }) => {
   const { item } = route.params;
@@ -36,31 +38,25 @@ const DetailTask = ({ route, navigation }) => {
   const [showEndPicker, setShowEndPicker] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newStatus, setNewStatus] = useState("");
-  const [isMe, setIsMe] = useState(false);
 
   const choice = [
     {
       id: "1",
-      title: "BACK LOG",
-      value: "BACKLOG",
-    },
-    {
-      id: "2",
       title: "TO DO",
       value: "TODO",
     },
     {
-      id: "3",
+      id: "2",
       title: "IN PROGRESS",
       value: "IN_PROGRESS",
     },
     {
-      id: "4",
+      id: "3",
       title: "DONE",
       value: "DONE",
     },
     {
-      id: "5",
+      id: "4",
       title: "FAILED",
       value: "FAILED",
     },
@@ -100,21 +96,6 @@ const DetailTask = ({ route, navigation }) => {
   }
 
   useEffect(() => {
-    getTaskById(item.id)
-      .then((response) => {
-        setName(response.data.name);
-        setDescription(response.data.description);
-        setStart(response.data.startDate);
-        setEnd(response.data.endDate);
-        setPriority(response.data.priority);
-        setStatus(response.data.status);
-        setCreator(response.data.creatorUser.username);
-        setAssignee(response.data.assigneeUser.username);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
     const unsubscribe = navigation.addListener("focus", () => {
       getTaskById(item.id)
         .then((response) => {
@@ -127,9 +108,7 @@ const DetailTask = ({ route, navigation }) => {
           setCreator(response.data.creatorUser.username);
           setAssignee(response.data.assigneeUser.username);
         })
-        .catch((error) => {
-          console.log(error)
-        });
+        .catch((error) => {});
     });
 
     return () => unsubscribe();
@@ -142,6 +121,7 @@ const DetailTask = ({ route, navigation }) => {
       startDate: addOneDay(new Date(start)),
       endDate: addOneDay(new Date(end)),
       priority,
+      username: await getUsername(),
     };
     if (!taskUpdate.name) {
       ToastAlert("error", "Error", "Name is required!");
@@ -160,9 +140,23 @@ const DetailTask = ({ route, navigation }) => {
     }
   };
 
+  const getStatusTextAndColor = (status) => {
+    switch (status) {
+      case "TODO":
+        return { text: "TO DO" };
+      case "IN_PROGRESS":
+        return { text: "IN PROGRESS" };
+      case "DONE":
+        return { text: "DONE" };
+      default:
+        return { text: "" };
+    }
+  };
+
   const handleStatus = async () => {
     const choice = {
       status: newStatus,
+      username: await getUsername(),
     };
     try {
       await changeStatusTask(choice, item.id);
@@ -181,7 +175,7 @@ const DetailTask = ({ route, navigation }) => {
     } catch (error) {
       ToastAlert("error", "Error", "Error when delete task!");
     }
-  }
+  };
 
   useEffect(() => {
     if (newStatus !== "") {
@@ -195,8 +189,8 @@ const DetailTask = ({ route, navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           className="flex flex-row items-center justify-center">
-          <FontAwesome5 name="arrow-left" size={24} color="blue" />
-          <Text className="ml-4 text-2xl font-semibold text-blue-700">
+          <FontAwesome5 name="arrow-left" size={20} color="blue" />
+          <Text className="ml-3 text-xl font-semibold text-blue-700">
             {name}
           </Text>
         </TouchableOpacity>
@@ -206,35 +200,35 @@ const DetailTask = ({ route, navigation }) => {
             <TouchableOpacity
               className="mr-3"
               onPress={() => setIsEditing(true)}>
-              <FontAwesome5 name="edit" size={24} color="blue" />
+              <FontAwesome5 name="edit" size={20} color="blue" />
             </TouchableOpacity>
-            <TouchableOpacity className="mr-3" onPress={handleDelete}>
-              <FontAwesome5 name="trash" size={24} color="blue" />
+            <TouchableOpacity className="" onPress={handleDelete}>
+              <FontAwesome5 name="trash" size={20} color="blue" />
             </TouchableOpacity>
           </View>
         )}
         {isEditing && (
           <View className="flex flex-row">
             <TouchableOpacity className="mr-3" onPress={handleUpdate}>
-              <FontAwesome5 name="check" size={24} color="blue" />
+              <FontAwesome5 name="check" size={20} color="blue" />
             </TouchableOpacity>
             <TouchableOpacity
-              className="mr-3"
+              className=""
               onPress={() => {
                 setIsEditing(false);
               }}>
-              <FontAwesome5 name="window-close" size={24} color="blue" />
+              <FontAwesome name="close" size={22} color="blue" />
             </TouchableOpacity>
           </View>
         )}
       </View>
       <Line />
 
-      <View className="justify-center p-4 mx-6 my-3 bg-gray-200 rounded-xl">
-        <Text className="text-xl font-medium ">Name</Text>
-        {!isEditing && <Text className="py-2 mb-2 text-lg ">{name}</Text>}
+      <View className="justify-center p-4 mx-6 my-2 bg-gray-200 rounded-xl">
+        <Text className="text-lg font-semibold">Name</Text>
+        {!isEditing && <Text className="py-1 text-lg ">{name}</Text>}
         {isEditing && (
-          <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
+          <View className="flex flex-row py-1 text-lg border-b border-gray-400">
             <TextInput
               className="flex-grow text-lg"
               value={name}
@@ -242,10 +236,10 @@ const DetailTask = ({ route, navigation }) => {
             />
           </View>
         )}
-        <Text className="text-xl font-medium ">Description</Text>
-        {!isEditing && <Text className="py-2 mb-2 text-lg">{description}</Text>}
+        <Text className="text-lg font-semibold">Description</Text>
+        {!isEditing && <Text className="py-1 text-lg ">{description}</Text>}
         {isEditing && (
-          <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
+          <View className="flex flex-row py-1 text-lg border-b border-gray-400">
             <TextInput
               className="flex-grow text-lg"
               value={description}
@@ -253,8 +247,8 @@ const DetailTask = ({ route, navigation }) => {
             />
           </View>
         )}
-        <Text className="text-xl font-medium ">Start</Text>
-        {!isEditing && <Text className="py-2 mb-2 text-lg">{start}</Text>}
+        <Text className="text-lg font-semibold">Start</Text>
+        {!isEditing && <Text className="py-1 text-lg ">{start}</Text>}
 
         {isEditing && showStartPicker && (
           <View>
@@ -265,7 +259,7 @@ const DetailTask = ({ route, navigation }) => {
               onChange={changeDate1}
             />
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 text-lg border-b border-gray-400"
               placeholder="Start date"
               value={start}
               onChangeText={setStart}
@@ -276,7 +270,7 @@ const DetailTask = ({ route, navigation }) => {
         {isEditing && !showStartPicker && (
           <TouchableOpacity onPress={toggleStartPicker}>
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 text-lg border-b border-gray-400"
               placeholder="Start date"
               value={start}
               onChangeText={setStart}
@@ -284,8 +278,8 @@ const DetailTask = ({ route, navigation }) => {
             />
           </TouchableOpacity>
         )}
-        <Text className="text-xl font-medium ">End</Text>
-        {!isEditing && <Text className="py-2 mb-2 text-lg">{end}</Text>}
+        <Text className="text-lg font-semibold">End</Text>
+        {!isEditing && <Text className="py-1 text-lg ">{end}</Text>}
 
         {isEditing && showEndPicker && (
           <View>
@@ -296,7 +290,7 @@ const DetailTask = ({ route, navigation }) => {
               onChange={changeDate2}
             />
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 text-lg border-b border-gray-400"
               placeholder="End date"
               value={end}
               onChangeText={setEnd}
@@ -307,7 +301,7 @@ const DetailTask = ({ route, navigation }) => {
         {isEditing && !showEndPicker && (
           <TouchableOpacity onPress={toggleEndPicker}>
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 text-lg border-b border-gray-400"
               placeholder="End date"
               value={end}
               onChangeText={setEnd}
@@ -316,8 +310,8 @@ const DetailTask = ({ route, navigation }) => {
           </TouchableOpacity>
         )}
 
-        <Text className="text-xl font-medium ">Priority</Text>
-        {!isEditing && <Text className="text-lg">{priority}</Text>}
+        <Text className="text-lg font-semibold">Priority</Text>
+        {!isEditing && <Text className="py-1 text-lg">{priority}</Text>}
         {isEditing && (
           <View className="-ml-3.5">
             <Picker
@@ -333,12 +327,12 @@ const DetailTask = ({ route, navigation }) => {
 
       <View className="justify-center p-4 mx-6 mb-3 bg-gray-200 rounded-xl">
         <View className="flex flex-row justify-between">
-          <Text className="text-xl font-medium ">Creator</Text>
+          <Text className="text-lg font-semibold">Creator</Text>
           <Text className="text-lg">{creator}</Text>
         </View>
         <View className="flex flex-row justify-between">
           <View className="flex flex-row">
-            <Text className="text-xl font-medium ">Assignee</Text>
+            <Text className="text-lg font-semibold">Assignee</Text>
             <TouchableOpacity
               className="justify-center ml-4"
               onPress={() => navigation.navigate("NewMemberScreen", { item })}>
@@ -350,8 +344,10 @@ const DetailTask = ({ route, navigation }) => {
       </View>
       <View className="justify-center p-4 mx-6 bg-gray-200 rounded-xl">
         <View className="flex flex-row justify-between mb-2">
-          <Text className="text-xl font-medium ">Status</Text>
-          <Text className="text-lg">{status}</Text>
+          <Text className="text-lg font-semibold">Status</Text>
+          <Text className="text-lg">
+            {getStatusTextAndColor(item.status).text}
+          </Text>
         </View>
         <View className="items-center justify-between">
           <FlatList
@@ -360,17 +356,37 @@ const DetailTask = ({ route, navigation }) => {
             contentContainerStyle={{}}
             data={choice.filter((item) => item.value !== status)}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item, index }) => (
-              <TouchableOpacity
-                className="p-1.5 m-1 bg-blue-700 rounded-xl"
-                onPress={() => {
-                  setNewStatus(item.value);
-                }}>
-                <Text className="font-bold text-white text-md">
-                  {item.title}
-                </Text>
-              </TouchableOpacity>
-            )}
+            renderItem={({ item, index }) => {
+              let color: any;
+              switch (item.title) {
+                case "TODO":
+                  color = "blue";
+                  break;
+                case "IN PROGRESS":
+                  color = "gold";
+                  break;
+                case "DONE":
+                  color = "green";
+                  break;
+                case "FAILED":
+                  color = "red";
+                  break;
+                default:
+                  color = "blue";
+              }
+              return (
+                <TouchableOpacity
+                  style={{ backgroundColor: color }}
+                  className="p-1.5 m-1 rounded-xl"
+                  onPress={() => {
+                    setNewStatus(item.value);
+                  }}>
+                  <Text className="font-bold text-white text-md">
+                    {item.title}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
           />
         </View>
       </View>

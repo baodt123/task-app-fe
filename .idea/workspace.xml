@@ -4,7 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="add exit app when use back" />
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="test in ios">
+      <change afterPath="$PROJECT_DIR$/src/eas.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/google-services.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/notify.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CustomDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CustomDrawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Line.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Line.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NothingFlatList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NothingFlatList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/DrawerStack.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/DrawerStack.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/TabNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/TabNavigation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/NotificationScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/NotificationScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/auth/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/LoginScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/auth/RegisterScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/RegisterScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/auth/WelcomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/WelcomeScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/AddProjectScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/AddProjectScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/DetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/DetailScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/EnrollUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/EnrollUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/ProjectScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/ProjectScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/AddTaskInside.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/AddTaskInside.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/BroadScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/BroadScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/DetailTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/DetailTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/NewMemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/NewMemberScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/member/AddMemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/member/AddMemberScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/project/member/MemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/member/MemberScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/task/AddTaskOutside.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/task/AddTaskOutside.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/task/ProjectSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/task/ProjectSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/task/TaskScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/task/TaskScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/user/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/user/ProfileScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/project.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/task.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/tsconfig.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +50,20 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;baodt123&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="48f32dab-bc32-4471-941f-0ca11b89f1ad" />
+        <option name="url" value="https://github.com/baodt123/task-app-fe.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -89,6 +139,9 @@
       <workItem from="1697964672421" duration="89000" />
       <workItem from="1697968726673" duration="73000" />
       <workItem from="1697989076250" duration="203000" />
+      <workItem from="1697993553458" duration="428000" />
+      <workItem from="1698022327269" duration="39000" />
+      <workItem from="1699372771881" duration="104000" />
     </task>
     <task id="LOCAL-00001" summary="fe-1">
       <option name="closed" value="true" />
@@ -178,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697989183013</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="test in ios">
+      <option name="closed" value="true" />
+      <created>1697993647901</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1697993647901</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +271,7 @@
     <MESSAGE value="fe-6: fix css" />
     <MESSAGE value="fix css" />
     <MESSAGE value="add exit app when use back" />
-    <option name="LAST_COMMIT_MESSAGE" value="add exit app when use back" />
+    <MESSAGE value="test in ios" />
+    <option name="LAST_COMMIT_MESSAGE" value="test in ios" />
   </component>
 </project>

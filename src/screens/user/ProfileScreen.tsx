@@ -76,7 +76,7 @@ const ProfileScreen = ({ navigation }) => {
       ToastAlert("error", "Error", "Wrong password!");
     }
   };
-  
+
   const handleUpdate = async () => {
     const updateRequest = {
       email,
@@ -117,7 +117,7 @@ const ProfileScreen = ({ navigation }) => {
           setFullName(response.data.fullName);
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
         });
     });
 
@@ -130,8 +130,8 @@ const ProfileScreen = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           className="flex flex-row items-center justify-center">
-          <FontAwesome5 name="arrow-left" size={24} color="blue" />
-          <Text className="ml-4 text-2xl font-semibold text-blue-700">
+          <FontAwesome5 name="arrow-left" size={20} color="blue" />
+          <Text className="ml-3 text-xl font-semibold text-blue-700">
             {name}
           </Text>
         </TouchableOpacity>
@@ -140,7 +140,7 @@ const ProfileScreen = ({ navigation }) => {
             <TouchableOpacity
               className="mr-3"
               onPress={() => setIsEditing(true)}>
-              <FontAwesome5 name="edit" size={24} color="blue" />
+              <FontAwesome5 name="edit" size={20} color="blue" />
             </TouchableOpacity>
           )}
           {!isChange && (
@@ -148,14 +148,14 @@ const ProfileScreen = ({ navigation }) => {
               onPress={() => {
                 setIsChange(true);
               }}>
-              <FontAwesome5 name="user-shield" size={24} color="blue" />
+              <FontAwesome5 name="user-shield" size={20} color="blue" />
             </TouchableOpacity>
           )}
         </View>
       </View>
       <Line />
       <View className="items-center justify-center p-2 m-2">
-        <FontAwesome5 name="user-astronaut" size={120} color="blue" />
+        <FontAwesome5 name="user-astronaut" size={100} color="blue" />
       </View>
       <View className="">
         {!isChange && (
@@ -220,10 +220,10 @@ const ProfileScreen = ({ navigation }) => {
       {!isChange && <View></View>}
       {isChange && (
         <View className="justify-center p-4 mx-6 bg-gray-200 rounded-xl">
-          <View className="mb-4 ">
-            <Text className="text-xl font-semibold">Change password</Text>
+          <View className="mx-4 mb-4">
+            <Text className="text-lg font-semibold">Change password</Text>
           </View>
-          <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-b border-gray-400">
+          <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-b border-gray-400">
             <TextInput
               className="flex-grow font-bold"
               placeholder="Old password"
@@ -241,7 +241,7 @@ const ProfileScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
-          <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-b border-gray-400">
+          <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-b border-gray-400">
             <TextInput
               className="flex-grow font-bold"
               placeholder="New password"
@@ -259,7 +259,7 @@ const ProfileScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
-          <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-b border-gray-400">
+          <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-b border-gray-400">
             <TextInput
               className="flex-grow font-bold"
               placeholder="Confirm password"

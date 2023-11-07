@@ -16,6 +16,7 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import { ToastAlert } from "../../components/ToastAlert";
 import { setUsername } from "../../services/user";
+import { subIndie } from "../../services/notify";
 
 const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
       password,
     };
 
-    if (name ==="") {
+    if (name === "") {
       ToastAlert("error", "Error", "Username required!");
       return;
     }
@@ -43,6 +44,7 @@ const LoginScreen = ({ navigation }) => {
         await setUsername(response.data.username);
         ToastAlert("success", "Hello", "What are you doing today?");
         navigation.navigate("Stack");
+        await subIndie();
       } else {
         ToastAlert("error", "Error", "Error when login");
       }
@@ -82,7 +84,7 @@ const LoginScreen = ({ navigation }) => {
             onChangeText={setName}
           />
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Password"
@@ -98,27 +100,20 @@ const LoginScreen = ({ navigation }) => {
             )}
           </TouchableOpacity>
         </View>
-        <View className="flex flex-row items-end justify-end">
-          <TouchableOpacity>
-            <Text className="mb-4 font-bold text-blue-700">
-              Forgot Password
-            </Text>
-          </TouchableOpacity>
-        </View>
         <TouchableOpacity
           onPress={handleLogin}
-          className="flex flex-row items-center justify-center h-12 px-6 bg-blue-700 rounded-xl ">
+          className="flex flex-row items-center justify-center h-12 px-6 mt-3 bg-blue-700 rounded-xl">
           <View className="flex items-center flex-1">
-            <Text className="text-base font-medium text-white ">Login</Text>
+            <Text className="text-base font-bold text-white ">Login</Text>
           </View>
         </TouchableOpacity>
-        <View className="flex-row justify-center mt-7">
+        <View className="flex-row justify-center mt-5">
           <Text className="font-semibold text-gray-500 ">
             Don't have an account?
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("RegisterScreen")}>
-            <Text className="font-semibold text-blue-700"> Register Now</Text>
+            <Text className="font-bold text-blue-700"> Register Now</Text>
           </TouchableOpacity>
         </View>
       </View>

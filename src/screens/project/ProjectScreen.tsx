@@ -12,9 +12,7 @@ import Line from "../../components/Line";
 import NothingFlatList from "../../components/NothingFlatList";
 import { DrawerActions } from "@react-navigation/native";
 
-
 const ProjectScreen = ({ navigation }) => {
-  
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -31,8 +29,7 @@ const ProjectScreen = ({ navigation }) => {
     return () => unsubscribe();
   }, [navigation]);
 
-
-  const colors = ["blue", "red", "green", "purple", "orange"];
+  const colors = ["blue", "red", "green", "orange"];
   const getColor = (index) => {
     return colors[index % colors.length];
   };
@@ -44,49 +41,54 @@ const ProjectScreen = ({ navigation }) => {
           <TouchableOpacity
             className="mr-3"
             onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-            <FontAwesome5 name="bars" size={24} color="blue" />
+            <FontAwesome5 name="bars" size={20} color="blue" />
           </TouchableOpacity>
-          <Text className="text-2xl font-semibold text-blue-700">
-            Project
-          </Text>
+          <Text className="text-xl font-semibold text-blue-700">Project</Text>
         </View>
         <View className="flex flex-row">
           <TouchableOpacity
             onPress={() => navigation.navigate("AddProjectScreen")}
             className="mr-4">
-            <FontAwesome5 name="plus" size={24} color="blue" />
+            <FontAwesome5 name="plus" size={20} color="blue" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("EnrollUser")}>
-            <FontAwesome5 name="search" size={24} color="blue" />
+            <FontAwesome5 name="search" size={20} color="blue" />
           </TouchableOpacity>
         </View>
       </View>
       <Line />
-      <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
+      <View className="mx-4">
         <View className="items-start justify-center">
-          <Text className="m-4 text-lg font-bold">
-            Projects - {projects.length}
+          <Text className="mx-3 my-2 text-lg font-semibold">
+            My projects - {projects.length}
           </Text>
         </View>
         <NothingFlatList item={projects} />
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
-          contentContainerStyle={{ paddingBottom: 10 }}
+          contentContainerStyle={{ paddingBottom: 150 }}
           data={projects}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              className="flex flex-row items-center p-3 mx-3 my-1.5 bg-white rounded-lg"
+              className="flex flex-row py-1.5 mx-3 my-1 bg-white rounded-lg"
               onPress={() =>
                 navigation.navigate("BroadScreen", { project: item })
               }>
-              <FontAwesome5
-                name="folder-open"
-                size={24}
-                color={getColor(index)}
-              />
-              <Text className="ml-3 text-lg font-medium ">{item.name}</Text>
+              <View className="items-center justify-center p-3 bg-white rounded-full">
+                <FontAwesome5
+                  name="folder-minus"
+                  size={20}
+                  color={getColor(index)}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text className="ml-2 text-base font-medium">{item.name}</Text>
+                <Text className="mb-1 ml-2 text-sm text-gray-400">
+                  {item.description != "" ? item.description : "No description"}
+                </Text>
+              </View>
             </TouchableOpacity>
           )}
         />

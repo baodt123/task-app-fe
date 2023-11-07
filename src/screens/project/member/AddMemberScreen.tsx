@@ -53,15 +53,15 @@ const AddMemberScreen = ({ route, navigation }) => {
           onPress={() => navigation.goBack()}
           className="flex flex-row items-center justify-center">
           <FontAwesome5 name="arrow-left" size={22} color="blue" />
-          <Text className="ml-4 text-2xl font-semibold text-blue-700">
+          <Text className="ml-3 text-xl font-semibold text-blue-700">
             {project.name}
           </Text>
         </TouchableOpacity>
       </View>
       <Line />
       <View className="mx-6 ">
-        <Text className="my-3 text-lg font-bold">
-          Add user to project - {members.length}
+        <Text className="mt-2 mb-3 text-lg font-semibold">
+          Add user to project
         </Text>
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -71,14 +71,14 @@ const AddMemberScreen = ({ route, navigation }) => {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              className="flex flex-row items-center p-3 my-1.5 bg-white rounded-lg"
+              className="flex flex-row items-center p-3 my-1 bg-white rounded-lg"
               onPress={() => handleAddMember(project.id, item.username)}>
               <FontAwesome5
                 name="user-plus"
-                size={24}
+                size={20}
                 color={getColor(index)}
               />
-              <Text className="ml-3 text-lg font-medium ">{item.username}</Text>
+              <Text className="ml-3 text-base font-semibold ">{item.username}</Text>
             </TouchableOpacity>
           )}
         />

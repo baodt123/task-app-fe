@@ -22,7 +22,11 @@ const TabNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <FontAwesome5 name="home" size={24} color={focused ? "blue" : "gray"} />
+            <FontAwesome5
+              name="clock"
+              size={20}
+              color={focused ? "blue" : "gray"}
+            />
           ),
         }}
       />
@@ -33,7 +37,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <FontAwesome5
               name="folder"
-              size={24}
+              size={20}
               color={focused ? "blue" : "gray"}
             />
           ),
@@ -46,7 +50,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <FontAwesome5
               name="tasks"
-              size={24}
+              size={20}
               color={focused ? "blue" : "gray"}
             />
           ),
@@ -59,7 +63,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <FontAwesome5
               name="bell"
-              size={24}
+              size={20}
               color={focused ? "blue" : "gray"}
             />
           ),

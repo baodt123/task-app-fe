@@ -94,18 +94,20 @@ const AddTaskOutside = ({ route, navigation }) => {
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        className="flex flex-row items-center ml-6">
-        <FontAwesome5 name="arrow-left" size={24} color="blue" />
-        <Text className="ml-4 text-2xl font-semibold text-blue-700">
-          Add new task
-        </Text>
-      </TouchableOpacity>
+      <View className="mx-6">
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          className="flex flex-row items-center">
+          <FontAwesome5 name="arrow-left" size={20} color="blue" />
+          <Text className="ml-3 text-xl font-semibold text-blue-700">
+            Add new task
+          </Text>
+        </TouchableOpacity>
+      </View>
       <Line />
-      <View className="p-4 mx-4 mt-2 bg-gray-200 rounded-xl">
-        <Text className="text-xl font-medium ">Name</Text>
-        <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
+      <View className="px-4 mx-4 mt-2">
+        <Text className="text-lg font-semibold">Name</Text>
+        <View className="flex flex-row py-1 mb-1 text-lg border-b border-gray-400">
           <TextInput
             className="flex-grow text-lg"
             placeholder="Name"
@@ -113,15 +115,15 @@ const AddTaskOutside = ({ route, navigation }) => {
             onChangeText={setName}
           />
         </View>
-        <Text className="text-xl font-medium ">Description</Text>
+        <Text className="text-lg font-semibold">Description</Text>
         <TextInput
-          className="py-2 mb-2 text-lg border-b border-gray-400"
+          className="py-1 mb-1 text-lg border-b border-gray-400"
           placeholder="Description"
           value={description}
           onChangeText={setDescription}
         />
 
-        <Text className="text-xl font-medium ">Start</Text>
+        <Text className="text-lg font-semibold">Start</Text>
         {showStartPicker && (
           <View>
             <DateTimePicker
@@ -131,7 +133,7 @@ const AddTaskOutside = ({ route, navigation }) => {
               onChange={changeDate1}
             />
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 mb-1 text-lg border-b border-gray-400"
               placeholder="Start date"
               value={start}
               onChangeText={setStart}
@@ -142,7 +144,7 @@ const AddTaskOutside = ({ route, navigation }) => {
         {!showStartPicker && (
           <TouchableOpacity onPress={toggleStartPicker}>
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 mb-1 text-lg border-b border-gray-400"
               placeholder="Start date"
               value={start}
               onChangeText={setStart}
@@ -151,7 +153,7 @@ const AddTaskOutside = ({ route, navigation }) => {
           </TouchableOpacity>
         )}
 
-        <Text className="text-xl font-medium ">End</Text>
+        <Text className="text-lg font-semibold">End</Text>
         {showEndPicker && (
           <View>
             <DateTimePicker
@@ -161,7 +163,7 @@ const AddTaskOutside = ({ route, navigation }) => {
               onChange={changeDate2}
             />
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 mb-1 text-lg border-b border-gray-400"
               placeholder="End date"
               value={end}
               onChangeText={setEnd}
@@ -172,7 +174,7 @@ const AddTaskOutside = ({ route, navigation }) => {
         {!showEndPicker && (
           <TouchableOpacity onPress={toggleEndPicker}>
             <TextInput
-              className="py-2 mb-2 text-lg border-b border-gray-400"
+              className="py-1 mb-1 text-lg border-b border-gray-400"
               placeholder="End date"
               value={end}
               onChangeText={setEnd}
@@ -182,16 +184,16 @@ const AddTaskOutside = ({ route, navigation }) => {
         )}
         <View className="flex flex-row items-center justify-between my-3">
           <View className="flex flex-row">
-            <Text className="text-xl font-medium">Project</Text>
+            <Text className="text-lg font-semibold">Project</Text>
             <TouchableOpacity
               className="justify-center ml-3"
               onPress={() => navigation.navigate("ProjectSearch")}>
               <FontAwesome5 name="plus-circle" size={18} color="blue" />
             </TouchableOpacity>
           </View>
-          <Text className="text-xl font-medium">{projectName}</Text>
+          <Text className="text-lg font-semibold">{projectName}</Text>
         </View>
-        <Text className="text-xl font-medium ">Priority</Text>
+        <Text className="text-lg font-semibold">Priority</Text>
         <View className="-ml-3.5">
           <Picker
             selectedValue={priority}
@@ -204,7 +206,7 @@ const AddTaskOutside = ({ route, navigation }) => {
         <TouchableOpacity
           className="items-center justify-center p-2.5 my-2 bg-blue-700 rounded-xl"
           onPress={handleCreateTask}>
-          <Text className="text-xl font-medium text-white">Create Task</Text>
+          <Text className="text-lg font-semibold text-white">Create Task</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

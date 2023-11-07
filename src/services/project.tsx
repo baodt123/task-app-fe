@@ -6,6 +6,7 @@ const BASE_URL = "http://192.168.1.227:8080/api/v1/project";
 interface ProjectData {
   name: string;
   description: string;
+  username: any;
 }
 
 export const createProjectApi = async ({ name, description }: ProjectData) => {
@@ -35,14 +36,11 @@ export const getProjectById = async (id: any) => {
   });
 };
 
-export const updateProjectApi = async (id: any,{ name, description }: ProjectData) => {
+export const updateProjectApi = async (id: any, data: ProjectData) => {
   return axios({
     method: "PUT",
     url: BASE_URL.concat(`/update/${id}`),
-    data: {
-      name,
-      description,
-    },
+    data: data,
   });
 };
 

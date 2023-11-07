@@ -90,7 +90,7 @@ const RegisterScreen = ({ navigation }) => {
         <Text className="font-semibold text-center text-gray-500 font-base">
           Create an account so you can explore all projects
         </Text>
-        <View className="flex flex-row items-center w-full h-12 px-4 mt-6 mb-4 bg-gray-100 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mt-6 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Email"
@@ -98,7 +98,7 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setEmail}
           />
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Username"
@@ -106,7 +106,7 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setUsername}
           />
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Password"
@@ -116,13 +116,13 @@ const RegisterScreen = ({ navigation }) => {
           />
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             {showPassword ? (
-              <FontAwesome5 name="eye-slash" size={24} color="blue" />
+              <FontAwesome5 name="eye-slash" size={20} color="blue" />
             ) : (
-              <FontAwesome5 name="eye" size={24} color="gray" />
+              <FontAwesome5 name="eye" size={20} color="gray" />
             )}
           </TouchableOpacity>
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-100 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Confirm Password"
@@ -152,7 +152,7 @@ const RegisterScreen = ({ navigation }) => {
             Already have an account?
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-            <Text className="font-semibold text-blue-700"> Login Now</Text>
+            <Text className="font-bold text-blue-700"> Login Now</Text>
           </TouchableOpacity>
         </View>
       </View>

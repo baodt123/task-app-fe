@@ -15,17 +15,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.baodt123.src"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.taskapp.magic"
+    "android": {},
+    "extra": {
+      "eas": {
+        "projectId": "b512838c-ab39-41a0-9954-83ac19849b54"
+      }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
   }
 }

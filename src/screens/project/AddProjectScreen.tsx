@@ -41,18 +41,20 @@ const AddProjectScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
-      <TouchableOpacity
-        onPress={() => navigation.goBack()}
-        className="flex flex-row items-center ml-6">
-        <FontAwesome5 name="arrow-left" size={24} color="blue" />
-        <Text className="ml-4 text-2xl font-semibold text-blue-700">
-          Add new project
-        </Text>
-      </TouchableOpacity>
-      <Line/>
-      <View className="justify-center p-4 m-6 bg-gray-200 rounded-xl">
-        <Text className="text-xl font-medium ">Name</Text>
-        <View className="flex flex-row py-2 mb-2 text-lg border-b border-gray-400">
+      <View className="mx-6">
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          className="flex flex-row items-center">
+          <FontAwesome5 name="arrow-left" size={20} color="blue" />
+          <Text className="ml-3 text-xl font-semibold text-blue-700">
+            Add new project
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <Line />
+      <View className="justify-center px-3 py-2 mx-6 rounded-xl">
+        <Text className="text-lg font-semibold ">Name</Text>
+        <View className="flex flex-row py-1 mb-2 text-lg border-b border-gray-400">
           <TextInput
             className="flex-grow text-lg"
             placeholder="Enter name"
@@ -60,17 +62,19 @@ const AddProjectScreen = ({ navigation }) => {
             onChangeText={setName}
           />
         </View>
-        <Text className="text-xl font-medium ">Description</Text>
+        <Text className="text-lg font-semibold ">Description</Text>
         <TextInput
-          className="py-2 mb-2 text-lg border-b border-gray-400"
+          className="py-1 mb-2 text-lg border-b border-gray-400"
           placeholder="Enter description"
           value={description}
           onChangeText={setDescription}
         />
         <TouchableOpacity
-          className="items-center justify-center p-2.5 my-2 bg-blue-700 rounded-xl"
+          className="items-center justify-center p-2.5 my-2 bg-blue-700 rounded-lg"
           onPress={hanldeCreate}>
-          <Text className="text-xl font-medium text-white">Create Project</Text>
+          <Text className="text-lg font-semibold text-white">
+            Create Project
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

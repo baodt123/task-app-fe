@@ -33,7 +33,7 @@ const EnrollUser = ({ navigation }) => {
     return () => unsubscribe();
   }, [navigation]);
 
-  const colors = ["blue", "red", "green", "purple", "cyan", "orange"];
+  const colors = ["blue", "red", "green", "orange"];
   const getColor = (index) => {
     return colors[index % colors.length];
   };
@@ -42,7 +42,7 @@ const EnrollUser = ({ navigation }) => {
     const username = await getUsername();
     try {
       await addMemberToProject(projectId, username);
-      ToastAlert("success", "Success", "New project was added to workspace!")
+      ToastAlert("success", "Success", "New project was added to workspace!");
       navigation.goBack();
     } catch (error) {
       console.log(error);
@@ -60,34 +60,36 @@ const EnrollUser = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         className="flex flex-row items-center ml-6">
-        <FontAwesome5 name="arrow-left" size={24} color="blue" />
-        <Text className="ml-4 text-2xl font-semibold text-blue-700">
+        <FontAwesome5 name="arrow-left" size={20} color="blue" />
+        <Text className="ml-3 text-xl font-semibold text-blue-700">
           Join in new project
         </Text>
       </TouchableOpacity>
       <Line />
-      <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
-        <View className="items-start justify-center ">
-          <Text className="m-4 text-lg font-bold">
-            Other projects - {projects.length}
-          </Text>
-        </View>
+      <View className="mx-3 mt-2">
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
+          contentContainerStyle={{ paddingBottom: 150 }}
           data={projects}
-          contentContainerStyle={{ paddingBottom: 30 }}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              className="flex flex-row items-center p-3 m-1.5 bg-white rounded-lg"
+              className="flex flex-row py-1.5 mx-3 my-1 bg-white rounded-lg"
               onPress={() => setProjectId(item.id)}>
-              <FontAwesome5
-                name="folder-plus"
-                size={24}
-                color={getColor(index)}
-              />
-              <Text className="ml-3 text-lg font-medium ">{item.name}</Text>
+              <View className="items-center justify-center p-3 bg-white rounded-full">
+                <FontAwesome5
+                  name="folder-plus"
+                  size={20}
+                  color={getColor(index)}
+                />
+              </View>
+              <View className="flex flex-col">
+                <Text className="ml-2 text-base font-medium">{item.name}</Text>
+                <Text className="mb-1 ml-2 text-sm text-gray-400">
+                  {item.description != "" ? item.description : "No description"}
+                </Text>
+              </View>
             </TouchableOpacity>
           )}
         />

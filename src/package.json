@@ -21,11 +21,14 @@
     "expo": "^49.0.13",
     "expo-auth-session": "~5.0.2",
     "expo-crypto": "~12.4.1",
+    "expo-device": "~5.4.0",
+    "expo-notifications": "~0.20.1",
+    "expo-permissions": "~14.2.1",
     "expo-secure-store": "~12.3.1",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "expo-web-browser": "~12.3.2",
-    "formik": "^2.4.5",
+    "native-notify": "^3.2.4",
     "nativewind": "^2.0.11",
     "prettier-plugin-nativewind": "^0.2.3",
     "react": "18.2.0",
@@ -36,8 +39,7 @@
     "react-native-toast-message": "^2.1.6",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
-    "react-select": "^5.7.7",
-    "yup": "^1.3.2"
+    "react-select": "^5.7.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

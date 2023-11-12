@@ -4,42 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="test in ios">
-      <change afterPath="$PROJECT_DIR$/src/eas.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/google-services.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/notify.tsx" afterDir="false" />
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="add notify and fix ui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CustomDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CustomDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Line.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Line.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NothingFlatList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NothingFlatList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/DrawerStack.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/DrawerStack.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/TabNavigation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/TabNavigation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/NotificationScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/NotificationScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/auth/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/LoginScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/auth/RegisterScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/RegisterScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/auth/WelcomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/WelcomeScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/AddProjectScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/AddProjectScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/DetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/DetailScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/EnrollUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/EnrollUser.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/ProjectScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/ProjectScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/AddTaskInside.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/AddTaskInside.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/BroadScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/BroadScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/DetailTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/DetailTask.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/broad/NewMemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/broad/NewMemberScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/member/AddMemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/member/AddMemberScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/project/member/MemberScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/project/member/MemberScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/task/AddTaskOutside.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/task/AddTaskOutside.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/task/ProjectSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/task/ProjectSearch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/task/TaskScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/task/TaskScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/user/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/user/ProfileScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/project.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/user.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +58,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -142,6 +117,12 @@
       <workItem from="1697993553458" duration="428000" />
       <workItem from="1698022327269" duration="39000" />
       <workItem from="1699372771881" duration="104000" />
+      <workItem from="1699377863090" duration="86000" />
+      <workItem from="1699413739102" duration="71000" />
+      <workItem from="1699414028999" duration="8000" />
+      <workItem from="1699414358273" duration="121000" />
+      <workItem from="1699515532295" duration="28000" />
+      <workItem from="1699515666362" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="fe-1">
       <option name="closed" value="true" />
@@ -239,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697993647901</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add notify and fix ui">
+      <option name="closed" value="true" />
+      <created>1699377940257</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699377940257</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +261,18 @@
     <MESSAGE value="fix css" />
     <MESSAGE value="add exit app when use back" />
     <MESSAGE value="test in ios" />
-    <option name="LAST_COMMIT_MESSAGE" value="test in ios" />
+    <MESSAGE value="add notify and fix ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="add notify and fix ui" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/screens/auth/RegisterScreen.tsx</url>
+          <line>123</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

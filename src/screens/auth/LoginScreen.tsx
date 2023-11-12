@@ -76,7 +76,7 @@ const LoginScreen = ({ navigation }) => {
         <Text className="mb-2 text-3xl font-bold text-center text-blue-700">
           Login
         </Text>
-        <View className="flex flex-row items-center w-full h-12 px-4 mt-6 mb-4 border-2 border-blue-700 bt-g-gray-100 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mt-6 mb-4 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Username"
@@ -84,7 +84,7 @@ const LoginScreen = ({ navigation }) => {
             onChangeText={setName}
           />
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Password"

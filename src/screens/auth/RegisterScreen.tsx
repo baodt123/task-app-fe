@@ -14,7 +14,7 @@ const RegisterScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
 
-  const handleRegister = async () => {
+  const handleRegister = () => {
     const registerRequest = {
       email,
       username,
@@ -72,7 +72,7 @@ const RegisterScreen = ({ navigation }) => {
     }
 
     try {
-      await registerApi(registerRequest);
+      registerApi(registerRequest);
       ToastAlert("success", "Success", "Sign up success!");
       navigation.navigate("LoginScreen");
     } catch (error) {
@@ -90,7 +90,7 @@ const RegisterScreen = ({ navigation }) => {
         <Text className="font-semibold text-center text-gray-500 font-base">
           Create an account so you can explore all projects
         </Text>
-        <View className="flex flex-row items-center w-full h-12 px-4 mt-6 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mt-6 mb-4 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Email"
@@ -98,7 +98,7 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setEmail}
           />
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Username"
@@ -106,7 +106,7 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setUsername}
           />
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Password"
@@ -122,7 +122,7 @@ const RegisterScreen = ({ navigation }) => {
             )}
           </TouchableOpacity>
         </View>
-        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 bg-gray-200 border-2 border-blue-700 rounded-xl">
+        <View className="flex flex-row items-center w-full h-12 px-4 mb-4 border-2 border-blue-700 rounded-xl">
           <TextInput
             className="flex-grow font-bold"
             placeholder="Confirm Password"
@@ -138,13 +138,11 @@ const RegisterScreen = ({ navigation }) => {
             )}
           </TouchableOpacity>
         </View>
-        <TouchableOpacity className="flex flex-row items-center justify-center h-12 px-6 mt-6 bg-blue-700 rounded-2xl">
+        <TouchableOpacity
+          className="flex flex-row items-center justify-center h-12 px-6 mt-6 bg-blue-700 rounded-2xl"
+          onPress={handleRegister}>
           <View className="flex items-center flex-1">
-            <Text
-              className="text-base font-bold text-white"
-              onPress={handleRegister}>
-              Sign Up
-            </Text>
+            <Text className="text-base font-bold text-white">Sign Up</Text>
           </View>
         </TouchableOpacity>
         <View className="flex-row justify-center mt-7">

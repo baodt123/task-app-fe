@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
-const BASE_URL = "http://192.168.1.227:8080/api/v1/auth";
+const BASE_URL = "https://task-app-magic-dcb626661833.herokuapp.com/api/v1/auth";
 
 interface RegisterData {
   username: string;
@@ -19,7 +19,7 @@ export const registerApi = (register: RegisterData) => {
   return axios({
     method: "POST",
     url: BASE_URL.concat("/register"),
-    data: register
+    data: register,
   });
 };
 

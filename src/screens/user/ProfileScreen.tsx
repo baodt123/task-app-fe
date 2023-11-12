@@ -155,22 +155,22 @@ const ProfileScreen = ({ navigation }) => {
       </View>
       <Line />
       <View className="items-center justify-center p-2 m-2">
-        <FontAwesome5 name="user-astronaut" size={100} color="blue" />
+        <FontAwesome5 name="user-circle" size={100} color="blue" />
       </View>
       <View className="">
         {!isChange && (
           <View className="justify-center p-4 mx-6 mb-6 bg-gray-200 rounded-xl">
             <View className="flex flex-row items-center justify-center m-3">
-              <Text className="mx-6 text-lg font-medium ">Name</Text>
+              <Text className="mx-6 text-base font-semibold">Name</Text>
               {!isEditing && (
-                <Text className="px-2 text-lg font-medium w-60">
+                <Text className="px-2 text-base font-semibold w-60">
                   {fullName}
                 </Text>
               )}
               {isEditing && (
                 <View className="flex flex-row items-center w-56 px-1 mr-4 border-b border-gray-400 bt-g-gray-100">
                   <TextInput
-                    className="flex-grow text-lg font-medium"
+                    className="flex-grow text-base font-semibold "
                     value={fullName}
                     onChangeText={setFullName}
                   />
@@ -178,14 +178,14 @@ const ProfileScreen = ({ navigation }) => {
               )}
             </View>
             <View className="flex flex-row items-center justify-center my-3 ">
-              <Text className="mx-6 text-lg font-medium">Email</Text>
+              <Text className="mx-6 text-base font-semibold">Email</Text>
               {!isEditing && (
-                <Text className="px-2 text-lg font-medium w-60">{email}</Text>
+                <Text className="px-2 text-base font-semibold w-60">{email}</Text>
               )}
               {isEditing && (
                 <View className="flex flex-row items-center w-56 px-1 mr-4 border-b border-gray-400 bt-g-gray-100">
                   <TextInput
-                    className="flex-grow text-lg font-medium"
+                    className="flex-grow text-base font-semibold "
                     value={email}
                     onChangeText={setEmail}
                   />

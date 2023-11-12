@@ -1,7 +1,8 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
-const BASE_URL = "http://192.168.1.227:8080/api/v1/user";
+const BASE_URL =
+  "https://task-app-magic-dcb626661833.herokuapp.com/api/v1/user";
 
 interface UpdateData {
   fullName: string;
@@ -55,7 +56,10 @@ export const updateUserInfo = async ({ fullName, email }: UpdateData) => {
   });
 };
 
-export const changePasswordUser = async ({oldPassword, newPassword}: ChangeData) => {
+export const changePasswordUser = async ({
+  oldPassword,
+  newPassword,
+}: ChangeData) => {
   const username = await getUsername();
   return axios({
     method: "PUT",

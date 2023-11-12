@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getUsername } from "./user";
 
-const BASE_URL = "http://192.168.1.227:8080/api/v1/task";
+const BASE_URL =
+  "https://task-app-magic-dcb626661833.herokuapp.com/api/v1/task";
 
 export enum Priority {
   LOW = "LOW",

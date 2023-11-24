@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="add notify and fix ui">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/auth/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/LoginScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/auth/RegisterScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/auth/RegisterScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/user/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/user/ProfileScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/auth.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/project.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/project.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/task.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/task.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/user.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="build apk" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,6 +114,7 @@
       <workItem from="1699414358273" duration="121000" />
       <workItem from="1699515532295" duration="28000" />
       <workItem from="1699515666362" duration="10000" />
+      <workItem from="1700850219822" duration="195000" />
     </task>
     <task id="LOCAL-00001" summary="fe-1">
       <option name="closed" value="true" />
@@ -228,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699377940257</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="build apk">
+      <option name="closed" value="true" />
+      <created>1700850396290</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1700850396290</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +262,8 @@
     <MESSAGE value="add exit app when use back" />
     <MESSAGE value="test in ios" />
     <MESSAGE value="add notify and fix ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="add notify and fix ui" />
+    <MESSAGE value="build apk" />
+    <option name="LAST_COMMIT_MESSAGE" value="build apk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

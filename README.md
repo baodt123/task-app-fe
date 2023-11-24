@@ -1,1 +1,1 @@
-task-app-fe react native + nativewind for style
+task-app-fe expo react native

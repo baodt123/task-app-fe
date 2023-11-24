@@ -1,6 +1,8 @@
 {
   "build": {
     "preview": {
+      "node": "18",
+      "java": "17",
       "android": {
         "buildType": "apk"
       }

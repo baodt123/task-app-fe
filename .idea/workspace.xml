@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="build apk" />
+    <list default="true" id="a79ec0fe-4d23-43e3-aed6-e5d7b8e3a645" name="Changes" comment="build apk v2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,6 +115,7 @@
       <workItem from="1699515532295" duration="28000" />
       <workItem from="1699515666362" duration="10000" />
       <workItem from="1700850219822" duration="195000" />
+      <workItem from="1700850542534" duration="53000" />
     </task>
     <task id="LOCAL-00001" summary="fe-1">
       <option name="closed" value="true" />
@@ -228,7 +229,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700850396290</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="build apk v2">
+      <option name="closed" value="true" />
+      <created>1700850582516</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1700850582516</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +272,8 @@
     <MESSAGE value="test in ios" />
     <MESSAGE value="add notify and fix ui" />
     <MESSAGE value="build apk" />
-    <option name="LAST_COMMIT_MESSAGE" value="build apk" />
+    <MESSAGE value="build apk v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="build apk v2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

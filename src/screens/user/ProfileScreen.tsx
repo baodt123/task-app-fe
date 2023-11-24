@@ -35,7 +35,7 @@ const ProfileScreen = ({ navigation }) => {
       ToastAlert("error", "Error", "Password is required!");
       return;
     }
-
+    
     if (changeData.oldPassword.length < 8) {
       ToastAlert(
         "error",
@@ -82,6 +82,11 @@ const ProfileScreen = ({ navigation }) => {
       email,
       fullName,
     };
+    const response = await getUserInfo();
+    if (updateRequest.email === response.data.email && updateRequest.fullName === response.data.fullName) {
+      setIsEditing(false);
+      return;
+    }
 
     if (!updateRequest.email) {
       ToastAlert("error", "Error", "Email is required!");
@@ -180,7 +185,9 @@ const ProfileScreen = ({ navigation }) => {
             <View className="flex flex-row items-center justify-center my-3 ">
               <Text className="mx-6 text-base font-semibold">Email</Text>
               {!isEditing && (
-                <Text className="px-2 text-base font-semibold w-60">{email}</Text>
+                <Text className="px-2 text-base font-semibold w-60">
+                  {email}
+                </Text>
               )}
               {isEditing && (
                 <View className="flex flex-row items-center w-56 px-1 mr-4 border-b border-gray-400 bt-g-gray-100">
@@ -196,14 +203,14 @@ const ProfileScreen = ({ navigation }) => {
               {isEditing && (
                 <>
                   <TouchableOpacity
-                    className="items-center justify-center h-12 px-8 ml-10 bg-blue-700 rounded-3xl"
+                    className="items-center justify-center h-12 px-8 ml-5 bg-blue-700 rounded-xl"
                     onPress={handleUpdate}>
                     <Text className="text-base font-medium text-white ">
                       Save
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    className="items-center justify-center h-12 px-6 mr-10 bg-white rounded-3xl"
+                    className="items-center justify-center h-12 px-6 mr-5 bg-white rounded-xl"
                     onPress={() => {
                       setIsEditing(false);
                     }}>
@@ -280,12 +287,12 @@ const ProfileScreen = ({ navigation }) => {
 
           <View className="flex flex-row items-center justify-between my-3">
             <TouchableOpacity
-              className="items-center justify-center h-12 px-8 ml-10 bg-blue-700 rounded-3xl"
+              className="items-center justify-center h-12 px-8 ml-5 bg-blue-700 rounded-xl"
               onPress={handleChange}>
               <Text className="text-base font-medium text-white ">Save</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className="items-center justify-center h-12 px-6 mr-10 bg-white rounded-3xl"
+              className="items-center justify-center h-12 px-6 mr-5 bg-white rounded-xl"
               onPress={() => {
                 setIsChange(false);
               }}>

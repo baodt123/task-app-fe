@@ -20,18 +20,17 @@ import { usePushNoti } from "../../services/notify";
 
 const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [name, setName] = useState("");
+  const [loginName, setLoginName] = useState("");
   const [password, setPassword] = useState("");
   const { expoPushToken } = usePushNoti();
   
   const handleLogin = async () => {
     const loginRequest = {
-      username: name,
+      username: loginName,
       password,
-      expoToken: expoPushToken.data,
+      expoToken: expoPushToken?.data,
     };
-
-    if (name === "") {
+    if (loginName === "") {
       ToastAlert("error", "Error", "Username required!");
       return;
     }
@@ -44,7 +43,7 @@ const LoginScreen = ({ navigation }) => {
       const result = await setAccessToken(response.data.accessToken);
       if (result) {
         await setUsername(response.data.username);
-        await setExpoToken(expoPushToken.data);
+        await setExpoToken(expoPushToken?.data);
         ToastAlert("success", "Hello", "What are you doing today?");
         navigation.navigate("Stack");
       } else {
@@ -82,8 +81,8 @@ const LoginScreen = ({ navigation }) => {
           <TextInput
             className="flex-grow font-bold"
             placeholder="Username"
-            value={name}
-            onChangeText={setName}
+            value={loginName}
+            onChangeText={setLoginName}
           />
         </View>
         <View className="flex flex-row items-center w-full h-12 px-4 mb-4 border-2 border-blue-700 rounded-xl">

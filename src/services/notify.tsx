@@ -1,25 +1,120 @@
-import { registerIndieID, unregisterIndieDevice } from "native-notify";
-import axios from "axios";
-import { getUsername } from "./user";
+import { useState, useEffect, useRef } from "react";
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
 
-export const subIndie = async () => {
-  const username = await getUsername();
-  registerIndieID(`${username}`, 14450, "bQ8g7WgDaaYTzGRhM2I0ID");
-};
+import Constants from "expo-constants";
+import { Platform } from "react-native";
 
-export const unsubIndie = async () => {
-  const username = await getUsername();
-  unregisterIndieDevice(`${username}`, 14450, "bQ8g7WgDaaYTzGRhM2I0ID");
-};
+export interface PushNotiState {
+  expoPushToken?: Notifications.ExpoPushToken;
+  notification?: Notifications.Notification;
+}
 
-export const sendNotify = async (message: string) => {
-  const username = await getUsername();
-  const parts = message.split("\n");
-  return axios.post(`https://app.nativenotify.com/api/indie/notification`, {
-    subID: `${username}`,
-    appId: 14450,
-    appToken: "bQ8g7WgDaaYTzGRhM2I0ID",
-    title: `${parts[0]}`,
-    message: `${parts[1]}`,
+ export const sendPushNotification = async (text, expoPushToken) => {
+    const parts = text.split("\n");
+   const message = {
+     to: expoPushToken,
+     sound: "default",
+     title: `${parts[0]}`,
+     body: `${parts[1]}`,
+   };
+
+   await fetch("https://exp.host/--/api/v2/push/send", {
+     method: "POST",
+     headers: {
+       Accept: "application/json",
+       "Accept-encoding": "gzip, deflate",
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify(message),
+   });
+ };
+
+export const usePushNoti = (): PushNotiState => {
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldPlaySound: false,
+      shouldShowAlert: true,
+      shouldSetBadge: false,
+    }),
   });
+
+  const [expoPushToken, setExpoPushToken] = useState<
+    Notifications.ExpoPushToken | undefined
+  >();
+
+  const [notification, setNotification] = useState<
+    Notifications.Notification | undefined
+  >();
+
+  const notificationListener = useRef<Notifications.Subscription>();
+  const responseListener = useRef<Notifications.Subscription>();
+
+  async function registerForPushNotiAsync() {
+    let token;
+    if (Device.isDevice) {
+      const { status: existingStatus } =
+        await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+
+      if (existingStatus !== "granted") {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== "granted") {
+        alert("Failed to get push token for push notifications!");
+        return;
+      }
+
+      token = await Notifications.getExpoPushTokenAsync({
+        projectId: "b512838c-ab39-41a0-9954-83ac19849b54",
+      });
+    } else {
+      alert("Must be using a physical device for Push notifications!");
+    }
+
+    if (Platform.OS === "android") {
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: "#FF231F7C",
+      });
+    }
+
+    return token;
+  }
+
+  useEffect(() => {
+    registerForPushNotiAsync().then((token) => {
+      setExpoPushToken(token);
+    });
+
+    notificationListener.current =
+      Notifications.addNotificationResponseReceivedListener((notification) => {
+        setNotification(notification);
+      });
+
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log(response);
+      });
+
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current!
+      );
+
+      Notifications.removeNotificationSubscription(responseListener.current!);
+    };
+  }, []);
+
+  return {
+    expoPushToken,
+    notification,
+  };
 };
+function async(arg0: any) {
+    throw new Error("Function not implemented.");
+}
+

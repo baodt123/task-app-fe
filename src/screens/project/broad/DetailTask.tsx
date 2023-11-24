@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  Alert,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -114,31 +115,41 @@ const DetailTask = ({ route, navigation }) => {
     return () => unsubscribe();
   }, [navigation]);
 
-  const handleUpdate = async () => {
-    const taskUpdate = {
-      name,
-      description,
-      startDate: addOneDay(new Date(start)),
-      endDate: addOneDay(new Date(end)),
-      priority,
-      username: await getUsername(),
+    const handleUpdate = async () => {
+      const taskUpdate = {
+        name,
+        description,
+        startDate: addOneDay(new Date(start)),
+        endDate: addOneDay(new Date(end)),
+        priority,
+        username: await getUsername(),
+      };
+      if (
+        taskUpdate.name === item.name &&
+        taskUpdate.description === item.description &&
+        taskUpdate.priority === item.priority
+      ) {
+        setIsEditing(false);
+        return;
+      }
+
+      if (!taskUpdate.name) {
+        ToastAlert("error", "Error", "Name is required!");
+        return;
+      }
+      if (taskUpdate.startDate > taskUpdate.endDate) {
+        ToastAlert("error", "Error", "Start date cannot be after end date!");
+        return;
+      }
+      try {
+        await updateTaskById(taskUpdate, item.id);
+        ToastAlert("success", "Success", "Update success!");
+        setIsEditing(false);
+      } catch (error) {
+        ToastAlert("error", "Error", "Name already been used!");
+      }
     };
-    if (!taskUpdate.name) {
-      ToastAlert("error", "Error", "Name is required!");
-      return;
-    }
-    if (taskUpdate.startDate > taskUpdate.endDate) {
-      ToastAlert("error", "Error", "Start date cannot be after end date!");
-      return;
-    }
-    try {
-      await updateTaskById(taskUpdate, item.id);
-      ToastAlert("success", "Success", "Create success!");
-      setIsEditing(false);
-    } catch (error) {
-      ToastAlert("error", "Error", "Name already been used!");
-    }
-  };
+
 
   const getStatusTextAndColor = (status) => {
     switch (status) {
@@ -167,15 +178,32 @@ const DetailTask = ({ route, navigation }) => {
     }
   };
 
-  const handleDelete = async () => {
-    try {
-      await deleteTask(item.id);
-      ToastAlert("success", "Success", "Delete task success!");
-      navigation.goBack();
-    } catch (error) {
-      ToastAlert("error", "Error", "Error when delete task!");
-    }
-  };
+const handleDelete = async () => {
+  Alert.alert(
+    "Confirmation",
+    "Are you sure you want to delete this task?",
+    [
+      {
+        text: "Cancel",
+        onPress: () => {},
+        style: "cancel",
+      },
+      {
+        text: "OK",
+        onPress: async () => {
+          try {
+            await deleteTask(item.id);
+            ToastAlert("success", "Success", "Delete task success!");
+            navigation.goBack();
+          } catch (error) {
+            ToastAlert("error", "Error", "Error when delete task!");
+          }
+        },
+      },
+    ],
+    { cancelable: false }
+  );
+};
 
   useEffect(() => {
     if (newStatus !== "") {

@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  Alert
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -71,13 +72,30 @@ const MemberScreen = ({ route, navigation }) => {
   }, [navigation]);
 
   const handleOut = async () => {
-    try {
-      await outProject(project.id);
-      ToastAlert("success", "Success", "Out project success!");
-      navigation.navigate("Home");
-    } catch (error) {
-      console.log(error);
-    }
+    Alert.alert(
+      "Confirmation",
+      "Are you sure you want to leave the project?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: async () => {
+            try {
+              await outProject(project.id);
+              ToastAlert("success", "Success", "Out project success!");
+              navigation.navigate("Home");
+            } catch (error) {
+              console.log(error);
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   return (

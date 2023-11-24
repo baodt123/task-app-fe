@@ -22,6 +22,8 @@ export const getUserInfo = async () => {
   });
 };
 
+
+
 export const setUsername = async (username: string) => {
   if (!username) {
     return false;
@@ -40,6 +42,28 @@ export const getUsername = async () => {
     return await SecureStore.getItemAsync("username");
   } catch (error) {
     console.log("error when get username", error);
+  }
+  return false;
+};
+
+export const setExpoToken = async (token: string) => {
+  if (!token) {
+    return false;
+  }
+  try {
+    await SecureStore.setItemAsync("expotoken", token);
+    return true;
+  } catch (error) {
+    console.log("error when save expo token", error);
+  }
+  return false;
+};
+
+export const getExpoToken = async () => {
+  try {
+    return await SecureStore.getItemAsync("expotoken");
+  } catch (error) {
+    console.log("error when get expo token", error);
   }
   return false;
 };

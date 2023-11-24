@@ -4,6 +4,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  TextInput,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -17,6 +19,7 @@ import { ToastAlert } from "../../../components/ToastAlert";
 const AddMemberScreen = ({ route, navigation }) => {
   const { project } = route.params;
   const [members, setMembers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const colors = ["blue", "red", "green", "purple", "cyan", "orange"];
 
   const getColor = (index) => {
@@ -36,15 +39,36 @@ const AddMemberScreen = ({ route, navigation }) => {
     fetchMembers();
   }, []);
 
-  const handleAddMember = async (id: any, username: string) => {
-    try {
-      await addMemberToProject(id, username);
-      ToastAlert("success", "Success", "New member was added to project!");
-      navigation.navigate("MemberScreen", { project });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const handleAddMember = async (id: any, username: string) => {
+  Alert.alert(
+    "Confirmation",
+    "Are you sure you want to add this user to the project?",
+    [
+      {
+        text: "Cancel",
+        onPress: () => {},
+        style: "cancel",
+      },
+      {
+        text: "OK",
+        onPress: async () => {
+          try {
+            await addMemberToProject(id, username);
+            ToastAlert(
+              "success",
+              "Success",
+              "New member was added to project!"
+            );
+            navigation.navigate("MemberScreen", { project });
+          } catch (error) {
+            console.log(error);
+          }
+        },
+      },
+    ],
+    { cancelable: false }
+  );
+};
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
@@ -59,15 +83,22 @@ const AddMemberScreen = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
       <Line />
+      <View className="p-2 mx-6 my-2 bg-white rounded-xl">
+        <TextInput
+          className="ml-2 text-base font-medium"
+          onChangeText={(text) => setSearchTerm(text)}
+          value={searchTerm}
+          placeholder="Add user to project"
+        />
+      </View>
       <View className="mx-6 ">
-        <Text className="mt-2 mb-3 text-lg font-semibold">
-          Add user to project
-        </Text>
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
           contentContainerStyle={{ paddingBottom: 120 }}
-          data={members}
+          data={members.filter((item) =>
+            item.username.toLowerCase().includes(searchTerm.toLowerCase())
+          )}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity
@@ -78,7 +109,9 @@ const AddMemberScreen = ({ route, navigation }) => {
                 size={20}
                 color={getColor(index)}
               />
-              <Text className="ml-3 text-base font-semibold ">{item.username}</Text>
+              <Text className="ml-3 text-base font-semibold ">
+                {item.username}
+              </Text>
             </TouchableOpacity>
           )}
         />

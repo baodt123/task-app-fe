@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "src",
+    "name": "Task App",
     "slug": "src",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,11 +18,16 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.baodt123.src"
     },
-    "android": {},
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
     "extra": {
       "eas": {
         "projectId": "b512838c-ab39-41a0-9954-83ac19849b54"
       }
-    },
+    }
   }
 }

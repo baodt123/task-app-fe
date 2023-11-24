@@ -13,6 +13,7 @@ interface RegisterData {
 interface LoginData {
   username: string;
   password: string;
+  expoToken: string;
 }
 
 export const registerApi = (register: RegisterData) => {
@@ -23,13 +24,14 @@ export const registerApi = (register: RegisterData) => {
   });
 };
 
-export const loginApi = ({ username, password }: LoginData) => {
+export const loginApi = ({ username, password, expoToken }: LoginData) => {
   return axios({
     method: "POST",
     url: BASE_URL.concat("/login"),
     data: {
       username,
       password,
+      expoToken,
     },
   });
 };

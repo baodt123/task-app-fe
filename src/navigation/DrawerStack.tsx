@@ -5,8 +5,8 @@ import ProfileScreen from "../screens/user/ProfileScreen";
 import TabNavigator from "./TabNavigation";
 import { FontAwesome5 } from "@expo/vector-icons";
 import CustomDrawer from "../components/CustomDrawer";
-import { sendNotify } from "../services/notify";
-import { getMessage } from "../services/user";
+import { sendPushNotification } from "../services/notify";
+import { getExpoToken, getMessage } from "../services/user";
 
 const Drawer = createDrawerNavigator();
 
@@ -14,12 +14,12 @@ const DrawerStack = ({ navigation }) => {
   const [lastMess, setLastMess] = useState("");
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
+    const unsubscribe = navigation.addListener("focus", async () => {
       getMessage()
-        .then((response) => {
+        .then(async (response) => {
           const newMess = response.data[response.data.length - 1];
           if (newMess !== lastMess) {
-            sendNotify(newMess);
+            await sendPushNotification(response.data.reverse()[0],await getExpoToken());
           }
           setLastMess(newMess);
         })

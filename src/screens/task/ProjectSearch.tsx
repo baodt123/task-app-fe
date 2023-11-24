@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  TextInput,
 } from "react-native";
 import { getProjectsApi } from "../../services/project";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -13,6 +14,7 @@ import NothingFlatList from "../../components/NothingFlatList";
 
 const ProjectSeacrh = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -44,17 +46,22 @@ const ProjectSeacrh = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
       <Line />
-      <View className="mx-4 mt-2 bg-gray-200 rounded-xl">
-        <View className="items-start justify-center">
-          <Text className="m-4 text-lg font-bold">
-            Your projects - {projects.length}
-          </Text>
-        </View>
+      <View className="p-2 mx-6 my-2 bg-white rounded-xl">
+        <TextInput
+          className="ml-2 text-base font-medium"
+          onChangeText={(text) => setSearchTerm(text)}
+          value={searchTerm}
+          placeholder="Add task to project"
+        />
+      </View>
+      <View className="mx-6 mt-2 bg-gray-200 rounded-xl">
         <NothingFlatList item={projects} />
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
-          data={projects}
+          data={projects.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity

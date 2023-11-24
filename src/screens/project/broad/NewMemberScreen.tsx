@@ -4,6 +4,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  TextInput,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -16,6 +18,7 @@ import { ToastAlert } from "../../../components/ToastAlert";
 const NewMemberScreen = ({ route, navigation }) => {
   const { item } = route.params;
   const [taskId, setTaskId] = useState(item.id);
+  const [searchTerm, setSearchTerm] = useState("");
   const [members, setMembers] = useState([]);
   const colors = ["blue", "red", "green", "purple", "cyan", "orange"];
 
@@ -37,13 +40,34 @@ const NewMemberScreen = ({ route, navigation }) => {
   }, []);
 
   const handleAddMember = async (id: any, username: string) => {
-    try {
-      await assigneeMemberToTask(id, username);
-      ToastAlert("success", "Success", "Member was assigned to prject");
-      navigation.goBack();
-    } catch (error) {
-      console.log(error);
-    }
+    Alert.alert(
+      "Confirmation",
+      "Are you sure you want to assign this user to the task?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: async () => {
+            try {
+              await assigneeMemberToTask(id, username);
+              ToastAlert(
+                "success",
+                "Success",
+                "Member was assigned to project"
+              );
+              navigation.goBack();
+            } catch (error) {
+              console.log(error);
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   return (
@@ -59,13 +83,21 @@ const NewMemberScreen = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
       <Line />
-      <View className="justify-center p-4 mx-6 my-3 bg-gray-200 rounded-xl">
-        <Text className="mb-6 text-lg font-bold">
-          Assigned members to task - {members.length}
-        </Text>
+      <View className="p-2 mx-6 my-2 bg-white rounded-xl">
+        <TextInput
+          className="ml-2 text-base font-medium"
+          onChangeText={(text) => setSearchTerm(text)}
+          value={searchTerm}
+          placeholder="Assign user to this task"
+        />
+      </View>
+      <View className="justify-center p-4 mx-6 my-3 bg-white rounded-xl">
         <NothingFlatList item={members} />
         <FlatList
-          data={members}
+          showsVerticalScrollIndicator={false}
+          data={members.filter((item) =>
+            item.username.toLowerCase().includes(searchTerm.toLowerCase())
+          )}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity

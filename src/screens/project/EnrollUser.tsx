@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
+  TextInput,
 } from "react-native";
 import {
   addMemberToProject,
@@ -18,6 +19,7 @@ import { ToastAlert } from "../../components/ToastAlert";
 const EnrollUser = ({ navigation }) => {
   const [projects, setProjects] = useState([]);
   const [projectId, setProjectId] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -66,12 +68,22 @@ const EnrollUser = ({ navigation }) => {
         </Text>
       </TouchableOpacity>
       <Line />
-      <View className="mx-3 mt-2">
+      <View className="p-2 mx-6 mt-2 bg-white rounded-xl">
+        <TextInput
+          className="ml-2 text-base font-medium"
+          onChangeText={(text) => setSearchTerm(text)}
+          value={searchTerm}
+          placeholder="Search"
+        />
+      </View>
+      <View className="mx-4 mt-2">
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled
           contentContainerStyle={{ paddingBottom: 150 }}
-          data={projects}
+          data={projects.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase())
+          )}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity

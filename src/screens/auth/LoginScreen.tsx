@@ -15,18 +15,20 @@ import {
 } from "../../services/auth";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { ToastAlert } from "../../components/ToastAlert";
-import { setUsername } from "../../services/user";
-import { subIndie } from "../../services/notify";
+import { setExpoToken, setUsername } from "../../services/user";
+import { usePushNoti } from "../../services/notify";
 
 const LoginScreen = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-
+  const { expoPushToken } = usePushNoti();
+  
   const handleLogin = async () => {
     const loginRequest = {
       username: name,
       password,
+      expoToken: expoPushToken.data,
     };
 
     if (name === "") {
@@ -42,9 +44,9 @@ const LoginScreen = ({ navigation }) => {
       const result = await setAccessToken(response.data.accessToken);
       if (result) {
         await setUsername(response.data.username);
+        await setExpoToken(expoPushToken.data);
         ToastAlert("success", "Hello", "What are you doing today?");
         navigation.navigate("Stack");
-        await subIndie();
       } else {
         ToastAlert("error", "Error", "Error when login");
       }

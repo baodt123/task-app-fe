@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  Alert,
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -25,20 +26,28 @@ const ProjectDetailScreen = ({ route, navigation }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isStream, SetIsStream] = useState([]);
 
-  const hanldeUpdate = async () => {
+  const handleUpdate = async () => {
     const username = await getUsername();
-    const ProjectData = {
+    const newProjectData = {
       name,
       description,
       username,
     };
 
-    if (!ProjectData.name) {
+    if (
+      newProjectData.name === project.name &&
+      newProjectData.description === project.description
+    ) {
+      setIsEditing(false);
+      return;
+    }
+
+    if (!newProjectData.name) {
       ToastAlert("error", "Error", "Name is required!");
       return;
     }
     try {
-      await updateProjectApi(project.id, ProjectData);
+      await updateProjectApi(project.id, newProjectData);
       ToastAlert("success", "Success", "Update project's detail success!");
       setIsEditing(false);
     } catch (error) {
@@ -47,13 +56,30 @@ const ProjectDetailScreen = ({ route, navigation }) => {
   };
 
   const handleDelete = async () => {
-    try {
-      await deleteProjectApi(project.id);
-      ToastAlert("success", "Success", "Delete success!");
-      navigation.navigate("Project");
-    } catch (error) {
-      ToastAlert("error", "Error", "Only managers can delete project!");
-    }
+    Alert.alert(
+      "Confirmation",
+      "Are you sure you want to delete the project?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: async () => {
+            try {
+              await deleteProjectApi(project.id);
+              ToastAlert("success", "Success", "Delete success!");
+              navigation.navigate("Project");
+            } catch (error) {
+              ToastAlert("error", "Error", "Only managers can delete project!");
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   useEffect(() => {
@@ -110,7 +136,7 @@ const ProjectDetailScreen = ({ route, navigation }) => {
           )}
           {isEditing && (
             <View className="flex flex-row">
-              <TouchableOpacity className="mr-3" onPress={hanldeUpdate}>
+              <TouchableOpacity className="mr-3" onPress={handleUpdate}>
                 <FontAwesome5 name="check" size={20} color="blue" />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setIsEditing(false)}>

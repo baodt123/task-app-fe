@@ -14,16 +14,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 const NotificationScreen = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
-
   useEffect(() => {
-    getMessage()
-      .then((response) => {
-        setMessages(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
     const unsubscribe = navigation.addListener("focus", () => {
       getMessage()
         .then((response) => {

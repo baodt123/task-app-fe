@@ -10,25 +10,7 @@ import { getExpoToken, getMessage } from "../services/user";
 
 const Drawer = createDrawerNavigator();
 
-const DrawerStack = ({ navigation }) => {
-  const [lastMess, setLastMess] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
-      getMessage()
-        .then(async (response) => {
-          const newMess = response.data[response.data.length - 1];
-          if (newMess !== lastMess) {
-            await sendPushNotification(response.data.reverse()[0],await getExpoToken());
-          }
-          setLastMess(newMess);
-        })
-        .catch((error) => {});
-    });
-
-    return () => unsubscribe();
-  }, [navigation, lastMess]);
-
+const DrawerStack = () => {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawer {...props} />}

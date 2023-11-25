@@ -1,4 +1,5 @@
-import {SafeAreaView} from 'react-native';
+import { SafeAreaView, Image } from "react-native";
+
 import { FontAwesome5 } from "@expo/vector-icons";
 import React from "react";
 
@@ -9,7 +10,10 @@ const WelcomeScreen = ({navigation}) => {
 
     return (
       <SafeAreaView className="items-center justify-center flex-1">
-        <FontAwesome5 name="tasks" size={120} color="blue" />
+        <Image
+          source={require("../../assets/icon.png")}
+          style={{ width: 160, height: 160 }}
+        />
       </SafeAreaView>
     );
 }

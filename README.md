@@ -19,7 +19,6 @@ Run the app in the development mode.
 yarn start
 ```
 ## Requirements
-
 task-app requires the following to run:
 - Nodejs >= 18.17.1 LTS
 - Expo SDK >= 49
@@ -34,11 +33,8 @@ task-app requires the following to run:
 </p>
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
 
 

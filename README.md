@@ -30,7 +30,7 @@ yarn start
 
 ## Screenshot
 
-<p float="left" align="center">
+<p float="left">
   <img src="https://drive.google.com/uc?export=view&id=1T7BbzFemkRQyeffrxh_ayseQEXnDTZkm" width="245" height="500">
   <img src="https://drive.google.com/uc?export=view&id=1T9FGx_7JrfYqTe53HUWFZTCiRDtpmfJK" width="245" height="500">
   <img src="https://drive.google.com/uc?export=view&id=1TDFarpgwMRJqJl_KP49NmqkNHUne5bDc" width="245" height="500">

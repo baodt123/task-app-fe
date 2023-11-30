@@ -13,6 +13,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { ToastAlert } from "../../../components/ToastAlert";
 import {
   changeStatusTask,
+  convertTime,
   deleteTask,
   getTaskById,
   updateTaskById,
@@ -32,6 +33,8 @@ const DetailTask = ({ route, navigation }) => {
   const [creator, setCreator] = useState("");
   const [assignee, setAssignee] = useState("");
   const [status, setStatus] = useState("");
+  const [original, setOriginal] = useState();
+
 
   const [date1, setDate1] = useState(new Date());
   const [date2, setDate2] = useState(new Date());
@@ -100,6 +103,7 @@ const DetailTask = ({ route, navigation }) => {
     const unsubscribe = navigation.addListener("focus", () => {
       getTaskById(item.id)
         .then((response) => {
+          setOriginal(response.data);
           setName(response.data.name);
           setDescription(response.data.description);
           setStart(response.data.startDate);
@@ -244,6 +248,11 @@ const handleDelete = async () => {
               className=""
               onPress={() => {
                 setIsEditing(false);
+                setName(original.name);
+                setDescription(original.description);
+                setStart(original.startDate);
+                setEnd(original.endDate);
+                setPriority(original.priority);
               }}>
               <FontAwesome name="close" size={22} color="blue" />
             </TouchableOpacity>
@@ -276,7 +285,9 @@ const handleDelete = async () => {
           </View>
         )}
         <Text className="text-lg font-semibold">Start</Text>
-        {!isEditing && <Text className="py-1 text-lg ">{start}</Text>}
+        {!isEditing && (
+          <Text className="py-1 text-lg ">{convertTime(start)}</Text>
+        )}
 
         {isEditing && showStartPicker && (
           <View>
@@ -289,7 +300,7 @@ const handleDelete = async () => {
             <TextInput
               className="py-1 text-lg border-b border-gray-400"
               placeholder="Start date"
-              value={start}
+              value={convertTime(start)}
               onChangeText={setStart}
               editable={false}
             />
@@ -300,14 +311,16 @@ const handleDelete = async () => {
             <TextInput
               className="py-1 text-lg border-b border-gray-400"
               placeholder="Start date"
-              value={start}
+              value={convertTime(start)}
               onChangeText={setStart}
               editable={false}
             />
           </TouchableOpacity>
         )}
         <Text className="text-lg font-semibold">End</Text>
-        {!isEditing && <Text className="py-1 text-lg ">{end}</Text>}
+        {!isEditing && (
+          <Text className="py-1 text-lg ">{convertTime(end)}</Text>
+        )}
 
         {isEditing && showEndPicker && (
           <View>
@@ -320,7 +333,7 @@ const handleDelete = async () => {
             <TextInput
               className="py-1 text-lg border-b border-gray-400"
               placeholder="End date"
-              value={end}
+              value={convertTime(end)}
               onChangeText={setEnd}
               editable={false}
             />
@@ -331,7 +344,7 @@ const handleDelete = async () => {
             <TextInput
               className="py-1 text-lg border-b border-gray-400"
               placeholder="End date"
-              value={end}
+              value={convertTime(end)}
               onChangeText={setEnd}
               editable={false}
             />

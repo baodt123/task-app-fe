@@ -102,3 +102,4 @@ export const getMessage = async () => {
     url: BASE_URL.concat(`/${username}/message`),
   });
 };
+

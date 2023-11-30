@@ -6,7 +6,7 @@ import {
   FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { getTaskByAssigneeUser } from "../../services/task";
+import { convertTime, getTaskByAssigneeUser } from "../../services/task";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Line from "../../components/Line";
 import NothingFlatList from "../../components/NothingFlatList";
@@ -48,6 +48,8 @@ const IssuesScreen = ({ navigation }) => {
         return { text: ""};
     }
   };
+
+
   return (
     <SafeAreaView className="flex-1 pt-12 ">
       <View className="flex flex-row items-center justify-between mx-6 ">
@@ -108,10 +110,11 @@ const IssuesScreen = ({ navigation }) => {
                 <View className="flex flex-row justify-between">
                   <View className="flex flex-row items-center">
                     <FontAwesome5 name="calendar-alt" size={20} color="red" />
-                    <Text className="ml-2 text-gray-400">{item.endDate}</Text>
+                    <Text className="ml-2 text-gray-400">
+                      {convertTime(item.endDate)}
+                    </Text>
                   </View>
-                  <Text
-                    className="text-base">
+                  <Text className="text-base">
                     {getStatusTextAndColor(item.status).text}
                   </Text>
                 </View>

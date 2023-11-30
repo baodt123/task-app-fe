@@ -118,3 +118,26 @@ export const deleteTask = async (id: any) => {
     data: username,
   });
 };
+
+export function convertTime(timeString: string) {
+    let date = new Date(timeString);
+    let day = date.getDate();
+    let monthIndex = date.getMonth();
+    let year = date.getFullYear();
+    let months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    let monthName = months[monthIndex];
+    return `${monthName} ${day < 10 ? "0" : ""}${day} ${year}`;
+  }

@@ -4,7 +4,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -28,6 +27,7 @@ const ProfileScreen = ({ navigation }) => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
+  const [original, setOriginal] = useState();
 
   const handleChange = async () => {
     const changeData = { oldPassword, newPassword };
@@ -117,6 +117,7 @@ const ProfileScreen = ({ navigation }) => {
     const unsubscribe = navigation.addListener("focus", () => {
       getUserInfo()
         .then((response) => {
+          setOriginal(response.data);
           setName(response.data.username);
           setEmail(response.data.email);
           setFullName(response.data.fullName);
@@ -203,16 +204,18 @@ const ProfileScreen = ({ navigation }) => {
               {isEditing && (
                 <>
                   <TouchableOpacity
-                    className="items-center justify-center h-12 px-8 ml-5 bg-blue-700 rounded-xl"
+                    className="items-center justify-center h-12 px-8 ml-8 bg-blue-700 rounded-xl"
                     onPress={handleUpdate}>
                     <Text className="text-base font-medium text-white ">
                       Save
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    className="items-center justify-center h-12 px-6 mr-5 bg-white rounded-xl"
+                    className="items-center justify-center h-12 px-6 mr-8 bg-white rounded-xl"
                     onPress={() => {
                       setIsEditing(false);
+                      setFullName(original.fullName);
+                      setEmail(original.email);
                     }}>
                     <Text className="text-base font-medium text-blue-700 ">
                       Cancel
@@ -287,15 +290,13 @@ const ProfileScreen = ({ navigation }) => {
 
           <View className="flex flex-row items-center justify-between my-3">
             <TouchableOpacity
-              className="items-center justify-center h-12 px-8 ml-5 bg-blue-700 rounded-xl"
+              className="items-center justify-center h-12 px-8 ml-8 bg-blue-700 rounded-xl"
               onPress={handleChange}>
               <Text className="text-base font-medium text-white ">Save</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className="items-center justify-center h-12 px-6 mr-5 bg-white rounded-xl"
-              onPress={() => {
-                setIsChange(false);
-              }}>
+              className="items-center justify-center h-12 px-6 mr-8 bg-white rounded-xl"
+              onPress={() => {setIsChange(false);}}>
               <Text className="text-base font-medium text-blue-700 ">
                 Cancel
               </Text>

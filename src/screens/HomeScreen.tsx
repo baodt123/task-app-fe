@@ -70,6 +70,42 @@ const HomeScreen = ({ navigation }) => {
   );
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  
+  function convertTime(timeString: string) {
+    let date = new Date(timeString);
+    date.setHours(date.getHours() + 7);
+    let day = date.getDate();
+    let monthIndex = date.getMonth();
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+
+    let months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    let monthName = months[monthIndex];
+
+    return `${day < 10 ? "0" : ""}${day} ${monthName} ${year} ${
+      hour < 10 ? "0" : ""
+    }${hour}:${minute < 10 ? "0" : ""}${minute}`;
+  }
+
+  function filterTime(time: string){
+    let date = new Date(time);
+    date.setHours(date.getHours() + 14);
+    return date.toISOString().split(".")[0].replace("T", " ");
+  }
 
   return (
     <SafeAreaView className="flex-1 pt-12 ">
@@ -92,7 +128,7 @@ const HomeScreen = ({ navigation }) => {
               projects
                 .filter((project) => {
                   const todayStreams = project.streams.filter((stream) => {
-                    const streamDate = new Date(stream.time);
+                    const streamDate = new Date(filterTime(stream.time));
                     streamDate.setHours(0, 0, 0, 0);
                     return streamDate.getTime() === today.getTime();
                   });
@@ -114,7 +150,7 @@ const HomeScreen = ({ navigation }) => {
           item={projects
             .filter((project) => {
               const todayStreams = project.streams.filter((stream) => {
-                const streamDate = new Date(stream.time);
+                const streamDate = new Date(filterTime(stream.time));
                 streamDate.setHours(0, 0, 0, 0);
                 return streamDate.getTime() === today.getTime();
               });
@@ -137,7 +173,7 @@ const HomeScreen = ({ navigation }) => {
           data={projects
             .filter((project) => {
               const todayStreams = project.streams.filter((stream) => {
-                const streamDate = new Date(stream.time);
+                const streamDate = new Date(filterTime(stream.time));
                 streamDate.setHours(0, 0, 0, 0);
                 return streamDate.getTime() === today.getTime();
               });
@@ -172,7 +208,7 @@ const HomeScreen = ({ navigation }) => {
                 <FlatList
                   data={item.streams
                     .filter((stream) => {
-                      const streamDate = new Date(stream.time);
+                      const streamDate = new Date(filterTime(stream.time));
                       streamDate.setHours(0, 0, 0, 0);
                       return streamDate.getTime() === today.getTime();
                     })
@@ -184,9 +220,9 @@ const HomeScreen = ({ navigation }) => {
                       <View className="flex flex-row">
                         <Text className="text-sm">{item.message}</Text>
                       </View>
-                      <View className="items-end">
+                      <View className="items-end mt-1">
                         <Text className="items-end text-sm text-gray-500">
-                          {item.time}
+                          {convertTime(item.time)}
                         </Text>
                       </View>
                     </View>

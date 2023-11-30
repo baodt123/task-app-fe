@@ -25,6 +25,7 @@ const ProjectDetailScreen = ({ route, navigation }) => {
   const [description, setDescription] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [isStream, SetIsStream] = useState([]);
+  const [original, setOriginal] = useState();
 
   const handleUpdate = async () => {
     const username = await getUsername();
@@ -86,6 +87,7 @@ const ProjectDetailScreen = ({ route, navigation }) => {
     const unsubscribe = navigation.addListener("focus", () => {
       getProjectById(project.id)
         .then((response) => {
+          setOriginal(response.data);
           setName(response.data.name);
           setDescription(response.data.description);
           SetIsStream(response.data.streams);
@@ -97,6 +99,36 @@ const ProjectDetailScreen = ({ route, navigation }) => {
 
     return () => unsubscribe();
   }, [navigation]);
+
+  function convertTime(timeString: string) {
+    let date = new Date(timeString);
+    date.setHours(date.getHours() + 7);
+    let day = date.getDate();
+    let monthIndex = date.getMonth();
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+
+    let months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    let monthName = months[monthIndex];
+
+    return `${day < 10 ? "0" : ""}${day} ${monthName} ${year} ${
+      hour < 10 ? "0" : ""
+    }${hour}:${minute < 10 ? "0" : ""}${minute}`;
+  }
 
   return (
     <SafeAreaView className="flex-1 pt-12">
@@ -139,7 +171,11 @@ const ProjectDetailScreen = ({ route, navigation }) => {
               <TouchableOpacity className="mr-3" onPress={handleUpdate}>
                 <FontAwesome5 name="check" size={20} color="blue" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setIsEditing(false)}>
+              <TouchableOpacity onPress={() => {
+                setIsEditing(false);
+                setName(original.name);
+                setDescription(original.description);
+              }}>
                 <FontAwesome name="close" size={22} color="blue" />
               </TouchableOpacity>
             </View>
@@ -188,7 +224,7 @@ const ProjectDetailScreen = ({ route, navigation }) => {
               </View>
               <View className="items-end mt-1">
                 <Text className="items-end text-sm text-gray-500">
-                  {item.time}
+                  {convertTime(item.time)}
                 </Text>
               </View>
             </View>

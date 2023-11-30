@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
+  convertTime,
   getDoneTasksByProjectId,
   getFailedTasksByProjectId,
   getInprogressTasksByProjectId,
@@ -172,7 +173,9 @@ const BroadScreen = ({ route, navigation }) => {
                 <View className="flex flex-row justify-between">
                   <View className="flex flex-row items-center">
                     <FontAwesome5 name="calendar-alt" size={20} color="blue" />
-                    <Text className="ml-2 text-slate-400">{item.endDate}</Text>
+                    <Text className="ml-2 text-slate-400">
+                      {convertTime(item.endDate)}
+                    </Text>
                   </View>
                   <Text className="">
                     {item.assigneeUser ? item.assigneeUser.username : ""}

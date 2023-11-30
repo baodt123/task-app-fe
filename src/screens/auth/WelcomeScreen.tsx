@@ -11,7 +11,7 @@ const WelcomeScreen = ({navigation}) => {
     return (
       <SafeAreaView className="items-center justify-center flex-1">
         <Image
-          source={require("../../assets/welcome.png")}
+          source={require("../../assets/icon.png")}
           style={{ width: 160, height: 160 }}
         />
       </SafeAreaView>

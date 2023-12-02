@@ -5,8 +5,6 @@ Task management application designed for both individuals and teams, incorporati
 [![Run in Expo Go](https://img.shields.io/badge/Run%20in%20Expo%20Go-4285F4.svg?style=flat-square&logo=EXPO&labelColor=4285F4&logoColor=fff)]()
 
 See backend for this app [here](https://github.com/baodt278/task-app-backend).
-
-Try it - [android](https://expo.dev/artifacts/eas/p4iCphjw989RgbLbUaCNvp.apk). 
 ## Installation
 In the project directory, you can run:
 ```bash

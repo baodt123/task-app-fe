@@ -20,21 +20,9 @@ yarn start
 ```
 ## Requirements
 task-app requires the following to run:
-- Nodejs >= 18.17.1 LTS
-- Expo SDK >= 49
-- Android 8.0 or above (API level 26)
-- Tailwindcss 3.3.2 (3.3.3 [error](https://stackoverflow.com/questions/76688256/getting-error-use-processcss-thencb-to-work-with-async-plugins))
+- Nodejs 18
+- Expo SDK 49
+- Android 8.0 (API level 26)
 
-## Screenshot
-<p float="left">
-  <img src="https://drive.google.com/uc?export=view&id=1T7BbzFemkRQyeffrxh_ayseQEXnDTZkm" width="245" height="500">
-  <img src="https://drive.google.com/uc?export=view&id=1T9FGx_7JrfYqTe53HUWFZTCiRDtpmfJK" width="245" height="500">
-  <img src="https://drive.google.com/uc?export=view&id=1TDFarpgwMRJqJl_KP49NmqkNHUne5bDc" width="245" height="500">
-</p>
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 
